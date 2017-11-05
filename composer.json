@@ -16,25 +16,11 @@
             "role": "Developer"
         }
     ],
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "json5/tests",
-                "version": "0.0.1",
-                "dist": {
-                    "url": "https://github.com/json5/json5-tests/archive/c9af328e6d77286d78b77b520c4622d588b544c0.zip",
-                    "type": "zip"
-                }
-            }
-        }
-    ],
     "require": {
         "php": "^5.3.3|^7.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
-        "json5/tests": "*",
         "squizlabs/php_codesniffer": "^2.3",
         "symfony/finder": "^2.3"
     },

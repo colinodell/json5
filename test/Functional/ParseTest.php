@@ -25,7 +25,7 @@ class ParseTest extends TestCase
     public function dataForTestJsonParsing()
     {
         $finder = new Finder();
-        $finder->files()->in(__DIR__.'/../../vendor/json5/tests/*')->name('*.json');
+        $finder->files()->in(__DIR__.'/data/*')->name('*.json');
 
         $tests = array();
         foreach ($finder as $file) {
