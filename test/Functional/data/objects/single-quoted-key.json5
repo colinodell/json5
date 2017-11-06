@@ -1,3 +1,11 @@
 {
     'hello': "world"
 }
+////////// EXPECTED OUTPUT: //////////
+stdClass::__set_state(array(
+   'hello' => 'world',
+))
+////////// EXPECTED OUTPUT: //////////
+array (
+  'hello' => 'world',
+)

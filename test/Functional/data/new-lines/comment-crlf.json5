@@ -1,3 +1,9 @@
 {
     // This comment is terminated with `\r\n`.
 }
+////////// EXPECTED OUTPUT: //////////
+stdClass::__set_state(array(
+))
+////////// EXPECTED OUTPUT: //////////
+array (
+)

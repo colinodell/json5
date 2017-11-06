@@ -1,3 +1,7 @@
 [
     false   // true
 ]
+////////// EXPECTED OUTPUT: //////////
+array (
+  0 => false,
+)

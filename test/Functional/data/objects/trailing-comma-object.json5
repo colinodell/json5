@@ -1,3 +1,11 @@
 {
     "foo": "bar",
 }
+////////// EXPECTED OUTPUT: //////////
+stdClass::__set_state(array(
+   'foo' => 'bar',
+))
+////////// EXPECTED OUTPUT: //////////
+array (
+  'foo' => 'bar',
+)

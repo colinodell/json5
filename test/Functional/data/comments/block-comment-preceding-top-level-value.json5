@@ -3,3 +3,5 @@
     we use null below.
 */
 null
+////////// EXPECTED OUTPUT: //////////
+NULL

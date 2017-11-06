@@ -1,6 +1,6 @@
 {
-    at: 5,
-    lineNumber: 2,
-    columnNumber: 0,
-    message: "Bad string"
+    "at": 4,
+    "lineNumber": 1,
+    "columnNumber": 5,
+    "message": "Bad string"
 }

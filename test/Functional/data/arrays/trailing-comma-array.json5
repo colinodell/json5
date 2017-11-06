@@ -1,3 +1,7 @@
 [
     null,
 ]
+////////// EXPECTED OUTPUT: //////////
+array (
+  0 => NULL,
+)

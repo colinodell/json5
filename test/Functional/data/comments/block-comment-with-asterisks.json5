@@ -5,3 +5,5 @@
  * Like this:
  **/
 true
+////////// EXPECTED OUTPUT: //////////
+true

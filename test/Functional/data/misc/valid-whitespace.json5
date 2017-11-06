@@ -3,3 +3,11 @@
     // Be careful not to delete it.
   "a": true
 }
+////////// EXPECTED OUTPUT: //////////
+stdClass::__set_state(array(
+   'a' => true,
+))
+////////// EXPECTED OUTPUT: //////////
+array (
+  'a' => true,
+)

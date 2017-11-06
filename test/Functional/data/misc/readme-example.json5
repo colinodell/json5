@@ -23,3 +23,39 @@ multi-line string',
         'trailing commas too',
     ],
 }
+////////// EXPECTED OUTPUT: //////////
+stdClass::__set_state(array(
+   'foo' => 'bar',
+   'while' => true,
+   'this' => 'is a multi-line string',
+   'here' => 'is another',
+   'hex' => 3735928559,
+   'half' => 0.5,
+   'delta' => 10,
+   'to' => INF,
+   'finally' => 'a trailing comma',
+   'oh' => 
+  array (
+    0 => 'we shouldn\'t forget',
+    1 => 'arrays can have',
+    2 => 'trailing commas too',
+  ),
+))
+////////// EXPECTED OUTPUT: //////////
+array (
+  'foo' => 'bar',
+  'while' => true,
+  'this' => 'is a multi-line string',
+  'here' => 'is another',
+  'hex' => 3735928559,
+  'half' => 0.5,
+  'delta' => 10,
+  'to' => INF,
+  'finally' => 'a trailing comma',
+  'oh' => 
+  array (
+    0 => 'we shouldn\'t forget',
+    1 => 'arrays can have',
+    2 => 'trailing commas too',
+  ),
+)

@@ -1,2 +1,4 @@
 'hello\
  world'
+ ////////// EXPECTED OUTPUT: //////////
+'hello world'

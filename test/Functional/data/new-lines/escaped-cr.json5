@@ -1,1 +1,9 @@
-{    // the following string contains an escaped `\r`    a: 'line 1 \line 2'}
+{    // the following string contains an escaped `\r`    a: 'line 1 \line 2'}
+////////// EXPECTED OUTPUT: //////////
+stdClass::__set_state(array(
+   'a' => 'line 1 line 2',
+))
+////////// EXPECTED OUTPUT: //////////
+array (
+  'a' => 'line 1 line 2',
+)

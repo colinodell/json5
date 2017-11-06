@@ -1,3 +1,11 @@
 {
     while: true
 }
+////////// EXPECTED OUTPUT: //////////
+stdClass::__set_state(array(
+   'while' => true,
+))
+////////// EXPECTED OUTPUT: //////////
+array (
+  'while' => true,
+)
