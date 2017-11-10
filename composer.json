@@ -28,7 +28,8 @@
     "autoload": {
         "psr-4": {
             "ColinODell\\Json5\\": "src"
-        }
+        },
+        "files": ["src/functions.php"]
     },
     "autoload-dev": {
         "psr-4": {
