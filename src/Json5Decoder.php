@@ -495,7 +495,7 @@ final class Json5Decoder
 
             $this->next('[');
             $this->white();
-            while ($this->ch) {
+            while ($this->ch !== null) {
                 if ($this->ch === ']') {
                     $this->next(']');
                     $this->depth--;
