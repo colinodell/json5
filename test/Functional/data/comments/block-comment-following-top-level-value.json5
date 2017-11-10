@@ -4,4 +4,4 @@ null
     we use null above.
 */
 ////////// EXPECTED OUTPUT: //////////
-NULL
+N;

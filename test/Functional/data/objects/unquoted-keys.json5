@@ -7,20 +7,6 @@
     $_$hello123world_$_: "mixed"
 }
 ////////// EXPECTED OUTPUT: //////////
-stdClass::__set_state(array(
-   'hello' => 'world',
-   '_' => 'underscore',
-   '$' => 'dollar sign',
-   'one1' => 'numerals',
-   '_$_' => 'multiple symbols',
-   '$_$hello123world_$_' => 'mixed',
-))
+O:8:"stdClass":6:{s:5:"hello";s:5:"world";s:1:"_";s:10:"underscore";s:1:"$";s:11:"dollar sign";s:4:"one1";s:8:"numerals";s:3:"_$_";s:16:"multiple symbols";s:19:"$_$hello123world_$_";s:5:"mixed";}
 ////////// EXPECTED OUTPUT: //////////
-array (
-  'hello' => 'world',
-  '_' => 'underscore',
-  '$' => 'dollar sign',
-  'one1' => 'numerals',
-  '_$_' => 'multiple symbols',
-  '$_$hello123world_$_' => 'mixed',
-)
+a:6:{s:5:"hello";s:5:"world";s:1:"_";s:10:"underscore";s:1:"$";s:11:"dollar sign";s:4:"one1";s:8:"numerals";s:3:"_$_";s:16:"multiple symbols";s:19:"$_$hello123world_$_";s:5:"mixed";}

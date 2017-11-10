@@ -2,10 +2,6 @@
     "foo": "bar",
 }
 ////////// EXPECTED OUTPUT: //////////
-stdClass::__set_state(array(
-   'foo' => 'bar',
-))
+O:8:"stdClass":1:{s:3:"foo";s:3:"bar";}
 ////////// EXPECTED OUTPUT: //////////
-array (
-  'foo' => 'bar',
-)
+a:1:{s:3:"foo";s:3:"bar";}

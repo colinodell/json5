@@ -4,10 +4,6 @@
   "a": true
 }
 ////////// EXPECTED OUTPUT: //////////
-stdClass::__set_state(array(
-   'a' => true,
-))
+O:8:"stdClass":1:{s:1:"a";b:1;}
 ////////// EXPECTED OUTPUT: //////////
-array (
-  'a' => true,
-)
+a:1:{s:1:"a";b:1;}

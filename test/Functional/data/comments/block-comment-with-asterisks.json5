@@ -6,4 +6,4 @@
  **/
 true
 ////////// EXPECTED OUTPUT: //////////
-true
+b:1;

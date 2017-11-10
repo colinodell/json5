@@ -1,4 +1,4 @@
 'hello\
  world'
  ////////// EXPECTED OUTPUT: //////////
-'hello world'
+s:11:"hello world";

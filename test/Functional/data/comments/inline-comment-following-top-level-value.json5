@@ -1,3 +1,3 @@
 null // Some non-comment top-level value is needed; we use null here.
 ////////// EXPECTED OUTPUT: //////////
-NULL
+N;

@@ -24,38 +24,6 @@ multi-line string',
     ],
 }
 ////////// EXPECTED OUTPUT: //////////
-stdClass::__set_state(array(
-   'foo' => 'bar',
-   'while' => true,
-   'this' => 'is a multi-line string',
-   'here' => 'is another',
-   'hex' => 3735928559,
-   'half' => 0.5,
-   'delta' => 10,
-   'to' => INF,
-   'finally' => 'a trailing comma',
-   'oh' => 
-  array (
-    0 => 'we shouldn\'t forget',
-    1 => 'arrays can have',
-    2 => 'trailing commas too',
-  ),
-))
+O:8:"stdClass":10:{s:3:"foo";s:3:"bar";s:5:"while";b:1;s:4:"this";s:22:"is a multi-line string";s:4:"here";s:10:"is another";s:3:"hex";i:3735928559;s:4:"half";d:0.5;s:5:"delta";i:10;s:2:"to";d:INF;s:7:"finally";s:16:"a trailing comma";s:2:"oh";a:3:{i:0;s:19:"we shouldn't forget";i:1;s:15:"arrays can have";i:2;s:19:"trailing commas too";}}
 ////////// EXPECTED OUTPUT: //////////
-array (
-  'foo' => 'bar',
-  'while' => true,
-  'this' => 'is a multi-line string',
-  'here' => 'is another',
-  'hex' => 3735928559,
-  'half' => 0.5,
-  'delta' => 10,
-  'to' => INF,
-  'finally' => 'a trailing comma',
-  'oh' => 
-  array (
-    0 => 'we shouldn\'t forget',
-    1 => 'arrays can have',
-    2 => 'trailing commas too',
-  ),
-)
+a:10:{s:3:"foo";s:3:"bar";s:5:"while";b:1;s:4:"this";s:22:"is a multi-line string";s:4:"here";s:10:"is another";s:3:"hex";i:3735928559;s:4:"half";d:0.5;s:5:"delta";i:10;s:2:"to";d:INF;s:7:"finally";s:16:"a trailing comma";s:2:"oh";a:3:{i:0;s:19:"we shouldn't forget";i:1;s:15:"arrays can have";i:2;s:19:"trailing commas too";}}

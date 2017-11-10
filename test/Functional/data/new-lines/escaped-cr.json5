@@ -1,9 +1,5 @@
 {    // the following string contains an escaped `\r`    a: 'line 1 \line 2'}
 ////////// EXPECTED OUTPUT: //////////
-stdClass::__set_state(array(
-   'a' => 'line 1 line 2',
-))
+O:8:"stdClass":1:{s:1:"a";s:13:"line 1 line 2";}
 ////////// EXPECTED OUTPUT: //////////
-array (
-  'a' => 'line 1 line 2',
-)
+a:1:{s:1:"a";s:13:"line 1 line 2";}

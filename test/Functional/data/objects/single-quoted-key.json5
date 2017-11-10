@@ -2,10 +2,6 @@
     'hello': "world"
 }
 ////////// EXPECTED OUTPUT: //////////
-stdClass::__set_state(array(
-   'hello' => 'world',
-))
+O:8:"stdClass":1:{s:5:"hello";s:5:"world";}
 ////////// EXPECTED OUTPUT: //////////
-array (
-  'hello' => 'world',
-)
+a:1:{s:5:"hello";s:5:"world";}

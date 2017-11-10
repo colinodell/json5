@@ -2,6 +2,4 @@
     null,
 ]
 ////////// EXPECTED OUTPUT: //////////
-array (
-  0 => NULL,
-)
+a:1:{i:0;N;}

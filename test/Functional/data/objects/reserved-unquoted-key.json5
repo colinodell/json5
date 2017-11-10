@@ -2,10 +2,6 @@
     while: true
 }
 ////////// EXPECTED OUTPUT: //////////
-stdClass::__set_state(array(
-   'while' => true,
-))
+O:8:"stdClass":1:{s:5:"while";b:1;}
 ////////// EXPECTED OUTPUT: //////////
-array (
-  'while' => true,
-)
+a:1:{s:5:"while";b:1;}

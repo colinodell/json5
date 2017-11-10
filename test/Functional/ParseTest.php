@@ -57,10 +57,10 @@ class ParseTest extends TestCase
      */
     public function testJson5Parsing($json, $expected, $expectedAssoc = null)
     {
-        $this->assertSame($expected, var_export(Json5Decoder::decode($json), true));
+        $this->assertSame($expected, serialize(Json5Decoder::decode($json)));
 
         if ($expectedAssoc !== null) {
-            $this->assertSame($expectedAssoc, var_export(Json5Decoder::decode($json, true), true));
+            $this->assertSame($expectedAssoc, serialize(Json5Decoder::decode($json, true)));
         }
     }
 

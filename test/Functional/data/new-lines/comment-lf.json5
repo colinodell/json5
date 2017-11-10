@@ -2,8 +2,6 @@
     // This comment is terminated with `\n`.
 }
 ////////// EXPECTED OUTPUT: //////////
-stdClass::__set_state(array(
-))
+O:8:"stdClass":0:{}
 ////////// EXPECTED OUTPUT: //////////
-array (
-)
+a:0:{}
