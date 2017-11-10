@@ -156,7 +156,7 @@ class ParseTest extends TestCase
             );
         }
 
-        return [$tests[24]];
+        return $tests;
     }
 
     private function getErrorSpec($file)
