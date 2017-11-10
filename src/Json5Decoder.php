@@ -281,9 +281,10 @@ final class Json5Decoder
             case 16:
                 if (($match = $this->match('/^[A-Fa-f0-9]+/')) !== null) {
                     $string .= $match;
+                    $number = hexdec($string);
+                    break;
                 }
-                $number = hexdec($string);
-                break;
+                $this->throwSyntaxError('Bad hex number');
         }
 
         if ($sign === '-') {
