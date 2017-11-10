@@ -32,6 +32,8 @@ final class Json5Decoder
 
     private $maxDepth = 512;
 
+    private $castBigIntToString = false;
+
     private $depth = 1;
 
     private $length;
@@ -44,20 +46,24 @@ final class Json5Decoder
      * @param bool   $associative
      * @param int    $depth
      */
-    private function __construct($json, $associative = false, $depth = 512)
+    private function __construct($json, $associative = false, $depth = 512, $castBigIntToString = false)
     {
         $this->json = $json;
         $this->associative = $associative;
         $this->maxDepth = $depth;
+        $this->castBigIntToString = $castBigIntToString;
 
         $this->length = mb_strlen($json, 'utf-8');
 
         $this->ch = $this->charAt(0);
     }
 
-    public static function decode($source, $associative = false, $depth = 512)
+    public static function decode($source, $associative = false, $depth = 512, $options = 0)
     {
-        $cursor = new self((string)$source, $associative, $depth);
+        $associative = $associative || ($options & JSON_OBJECT_AS_ARRAY);
+        $castBigIntToString = $options & JSON_BIGINT_AS_STRING;
+
+        $cursor = new self((string)$source, $associative, $depth, $castBigIntToString);
 
         $result = $cursor->value();
         $cursor->white();
@@ -271,6 +277,10 @@ final class Json5Decoder
 
         if (!is_numeric($number) || !is_finite($number)) {
             $this->throwSyntaxError('Bad number');
+        }
+
+        if ($this->castBigIntToString) {
+            return $number;
         }
 
         // Adding 0 will automatically cast this to an int or float
