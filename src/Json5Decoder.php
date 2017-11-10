@@ -271,7 +271,7 @@ final class Json5Decoder
         switch ($base) {
             case 10:
                 if (($match = $this->match('/^\d*\.?\d*/')) !== null) {
-                    $string .= $match;
+                    $string .= rtrim($match, '.');
                 }
                 if (($match = $this->match('/^[Ee][-+]?\d*/')) !== null) {
                     $string .= $match;
