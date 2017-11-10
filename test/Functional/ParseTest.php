@@ -62,6 +62,10 @@ class ParseTest extends TestCase
 
         $tests = array();
         foreach ($finder as $file) {
+            if (strpos($file->getPath(), '/todo') !== false) {
+                continue;
+            }
+
             $data = explode('////////// EXPECTED OUTPUT: //////////', file_get_contents($file));
             $tests[] = array(
                 $data[0],
