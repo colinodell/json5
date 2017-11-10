@@ -41,10 +41,12 @@ final class Json5Decoder
     private $lineCache;
 
     /**
-     * Cursor constructor.
+     * Private constructor.
+     *
      * @param string $json
      * @param bool   $associative
      * @param int    $depth
+     * @param bool   $castBigIntToString
      */
     private function __construct($json, $associative = false, $depth = 512, $castBigIntToString = false)
     {
@@ -58,17 +60,30 @@ final class Json5Decoder
         $this->ch = $this->charAt(0);
     }
 
+    /**
+     * Takes a JSON encoded string and converts it into a PHP variable.
+     *
+     * The parameters exactly match PHP's json_decode() function - see
+     * http://php.net/manual/en/function.json-decode.php for more information.
+     *
+     * @param string $source      The JSON string being decoded.
+     * @param bool   $associative When TRUE, returned objects will be converted into associative arrays.
+     * @param int    $depth       User specified recursion depth.
+     * @param int    $options     Bitmask of JSON decode options.
+     *
+     * @return mixed
+     */
     public static function decode($source, $associative = false, $depth = 512, $options = 0)
     {
         $associative = $associative || ($options & JSON_OBJECT_AS_ARRAY);
         $castBigIntToString = $options & JSON_BIGINT_AS_STRING;
 
-        $cursor = new self((string)$source, $associative, $depth, $castBigIntToString);
+        $decoder = new self((string)$source, $associative, $depth, $castBigIntToString);
 
-        $result = $cursor->value();
-        $cursor->white();
-        if ($cursor->ch) {
-            $cursor->throwSyntaxError('Syntax error');
+        $result = $decoder->value();
+        $decoder->white();
+        if ($decoder->ch) {
+            $decoder->throwSyntaxError('Syntax error');
         }
 
         return $result;

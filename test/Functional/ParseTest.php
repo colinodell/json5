@@ -1,5 +1,17 @@
 <?php
 
+/*
+ * This file is part of the colinodell/json5 package.
+ *
+ * (c) Colin O'Dell <colinodell@gmail.com>
+ *
+ * Based on the official JSON5 implementation for JavaScript (https://github.com/json5/json5)
+ *  - (c) 2012-2016 Aseem Kishore and others (https://github.com/json5/json5/contributors)
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace ColinODell\Json5\Test\Functional;
 
 use ColinODell\Json5\Json5Decoder;
