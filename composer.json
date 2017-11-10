@@ -3,8 +3,10 @@
     "type": "library",
     "description": "JSON5 - JSON for Humans",
     "keywords": [
-        "colinodell",
-        "json5"
+        "json5",
+        "json",
+        "json5_decode",
+        "json_decode"
     ],
     "homepage": "https://github.com/colinodell/json5",
     "license": "MIT",
