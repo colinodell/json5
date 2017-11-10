@@ -609,7 +609,7 @@ final class Json5Decoder
 
     private static function renderChar($chr)
     {
-        return $chr === '' ? 'EOF' : "'" . $chr . "'";
+        return $chr === null ? 'EOF' : "'" . $chr . "'";
     }
 
     /**
