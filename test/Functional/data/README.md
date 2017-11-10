@@ -17,6 +17,10 @@ The test cases' file extension signals the expected behavior:
 This should cover all our bases. Most of the cases are unit tests for each
 supported data type, but aggregate test cases are welcome, too.
 
+**Be extremely careful when editing these files, especially the line ending
+tests, as they may intentionally contain different and/or mismatched line
+endings which MUST be preserved as-is!**
+
 ## License
 
 MIT. See [LICENSE.md](./LICENSE.md) for details.
