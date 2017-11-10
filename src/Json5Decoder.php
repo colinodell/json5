@@ -177,7 +177,6 @@ final class Json5Decoder
      */
     private function match($regex)
     {
-        // ($this->ch === "\n" || ($this->ch === "\r" && $this->peek() !== "\n"))
         $subject = $this->getLineRemainder();
 
         $matches = array();
