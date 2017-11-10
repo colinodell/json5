@@ -8,9 +8,41 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 
 
-This library is a PHP fork of the [JSON5 parser][link-json5].
+This library is a PHP fork of the [JSON5 reference implementation][link-json5].
 
-JSON5 allows comments, trailing commas, single-quoted strings, and more - [see their documentation for details][link-json5-site].
+JSON5 is a JS-compatible extension to JSON which allows comments, trailing commas, single-quoted strings, and more:
+
+
+```js
+{
+    foo: 'bar',
+    while: true,
+
+    this: 'is a \
+multi-line string',
+
+    // this is an inline comment
+    here: 'is another', // inline comment
+
+    /* this is a block comment
+       that continues on another line */
+
+    hex: 0xDEADbeef,
+    half: .5,
+    delta: +10,
+    to: Infinity,   // and beyond!
+
+    finally: 'a trailing comma',
+    oh: [
+        "we shouldn't forget",
+        'arrays can have',
+        'trailing commas too',
+    ],
+}
+```
+
+
+[See the JSON5 website for additional examples and details][link-json5-site].
 
 
 ## Install
@@ -23,10 +55,14 @@ $ composer require colinodell/json5
 
 ## Usage
 
+This package adds a `json5_decode()` function which is a drop-in replacement for PHP's built-in `json_decode()`:
+
 ``` php
 $json = file_get_contents('foo.json');
-$arr = Json5Decoder::decode($json);
+$arr = json5_decode($json);
 ```
+
+It takes the same exact parameters in the same order.  For more details on these, see the [PHP docs][link-php-jsondecode].
 
 ## Change log
 
@@ -70,6 +106,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-downloads]: https://packagist.org/packages/colinodell/json5
 [link-author]: https://github.com/colinodell
 [link-json5]: https://github.com/json5/json5
+[link-php-jsondecode]: http://php.net/manual/en/function.json-decode.php
 [link-upstream-author]: https://github.com/aseemk
 [link-upstream-contributors]: https://github.com/json5/json5#credits
 [link-json5-site]: http://json5.org
