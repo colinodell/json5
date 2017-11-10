@@ -64,6 +64,43 @@ $arr = json5_decode($json);
 
 It takes the same exact parameters in the same order.  For more details on these, see the [PHP docs][link-php-jsondecode].
 
+## Binary / Executable
+
+A binary/executable named `json5` is also provided for converting JSON5 to plain JSON via your terminal.
+
+```
+Usage: json5 [OPTIONS] [FILE]
+
+  -h, --help  Shows help and usage information
+
+  (Reading data from STDIN is not currently supported on Windows)
+```
+
+### Examples:
+
+Converting a file named file.json5:
+
+```bash
+json5 file.json5
+```
+
+Converting a file and saving its output:
+
+```bash
+json5 file.json5 > file.json
+```
+
+Converting from STDIN:
+
+```bash
+echo -e "{hello: 'world!'}" | json5
+```
+
+Converting from STDIN and saving the output:
+```bash
+echo -e "{hello: 'world!'}" | json5 > output.json
+```
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
