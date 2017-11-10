@@ -30,6 +30,10 @@ final class Json5Decoder
 
     private $associative = false;
 
+    private $maxDepth = 512;
+
+    private $depth = 1;
+
     private $length;
 
     private $lineCache;
@@ -38,20 +42,22 @@ final class Json5Decoder
      * Cursor constructor.
      * @param string $json
      * @param bool   $associative
+     * @param int    $depth
      */
-    private function __construct($json, $associative = false)
+    private function __construct($json, $associative = false, $depth = 512)
     {
         $this->json = $json;
         $this->associative = $associative;
+        $this->maxDepth = $depth;
 
         $this->length = mb_strlen($json, 'utf-8');
 
         $this->ch = $this->charAt(0);
     }
 
-    public static function decode($source, $associative = false)
+    public static function decode($source, $associative = false, $depth = 512)
     {
-        $cursor = new self((string)$source, $associative);
+        $cursor = new self((string)$source, $associative, $depth);
 
         $result = $cursor->value();
         $cursor->white();
@@ -457,11 +463,16 @@ final class Json5Decoder
         $arr = array();
 
         if ($this->ch === '[') {
+            if (++$this->depth > $this->maxDepth) {
+                $this->throwSyntaxError('Maximum stack depth exceeded');
+            }
+
             $this->next('[');
             $this->white();
             while ($this->ch) {
                 if ($this->ch === ']') {
                     $this->next(']');
+                    $this->depth--;
                     return $arr; // Potentially empty array
                 }
                 // ES5 allows omitting elements in arrays, e.g. [,] and
@@ -476,6 +487,7 @@ final class Json5Decoder
                 // be the end of the array.
                 if ($this->ch !== ',') {
                     $this->next(']');
+                    $this->depth--;
                     return $arr;
                 }
                 $this->next(',');
@@ -495,11 +507,16 @@ final class Json5Decoder
         $object = $this->associative ? array() : new \stdClass;
 
         if ($this->ch === '{') {
+            if (++$this->depth > $this->maxDepth) {
+                $this->throwSyntaxError('Maximum stack depth exceeded');
+            }
+
             $this->next('{');
             $this->white();
             while ($this->ch) {
                 if ($this->ch === '}') {
                     $this->next('}');
+                    $this->depth--;
                     return $object; // Potentially empty object
                 }
 
@@ -523,6 +540,7 @@ final class Json5Decoder
                 // the end of the object.
                 if ($this->ch !== ',') {
                     $this->next('}');
+                    $this->depth--;
                     return $object;
                 }
                 $this->next(',');
