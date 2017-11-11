@@ -608,7 +608,7 @@ final class Json5Decoder
 
     private function throwSyntaxError($message)
     {
-        throw new SyntaxError($message, $this->at, $this->lineNumber, $this->columnNumber);
+        throw new SyntaxError($message, $this->lineNumber, $this->columnNumber);
     }
 
     private static function renderChar($chr)
