@@ -318,7 +318,9 @@ final class Json5Decoder
                 $this->next();
 
                 return $string;
-            } elseif ($this->ch === '\\') {
+            }
+
+            if ($this->ch === '\\') {
                 if ($unicodeEscaped = $this->match('/^(?:\\\\u[A-Fa-f0-9]{4})+/')) {
                     $string .= json_decode('"'.$unicodeEscaped.'"');
                     continue;
@@ -494,9 +496,10 @@ final class Json5Decoder
                 // [,null]. We don't allow this in JSON5.
                 if ($this->ch === ',') {
                     $this->throwSyntaxError('Missing array element');
-                } else {
-                    $arr[] = $this->value();
                 }
+
+                $arr[] = $this->value();
+
                 $this->white();
                 // If there's no comma after this value, this needs to
                 // be the end of the array.
