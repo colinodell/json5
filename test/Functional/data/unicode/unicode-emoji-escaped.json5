@@ -1,0 +1,3 @@
+"If you're \uD83D\uDE02 and you know it clap your hands!"
+////////// EXPECTED OUTPUT: //////////
+s:47:"If you're 😂 and you know it clap your hands!";

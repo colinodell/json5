@@ -1,0 +1,7 @@
+{
+    \uD83D\uDE02: "happy face"
+}
+////////// EXPECTED OUTPUT: //////////
+O:8:"stdClass":1:{s:4:"😂";s:10:"happy face";}
+////////// EXPECTED OUTPUT: //////////
+a:1:{s:4:"😂";s:10:"happy face";}
