@@ -1,0 +1,7 @@
+{
+    ümlåût: "that's not really an ümlaüt, but this is"
+}
+////////// EXPECTED OUTPUT: //////////
+O:8:"stdClass":1:{s:9:"ümlåût";s:42:"that's not really an ümlaüt, but this is";}
+////////// EXPECTED OUTPUT: //////////
+a:1:{s:9:"ümlåût";s:42:"that's not really an ümlaüt, but this is";}

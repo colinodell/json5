@@ -1,0 +1,7 @@
+{
+    sig\u03A3ma: "the sum of all things"
+}
+////////// EXPECTED OUTPUT: //////////
+O:8:"stdClass":1:{s:7:"sigΣma";s:21:"the sum of all things";}
+////////// EXPECTED OUTPUT: //////////
+a:1:{s:7:"sigΣma";s:21:"the sum of all things";}

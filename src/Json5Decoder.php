@@ -207,19 +207,22 @@ final class Json5Decoder
      * - http://es5.github.com/#x7.6
      * - https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Core_Language_Features#Variables
      * - http://docstore.mik.ua/orelly/webprog/jscript/ch02_07.htm
-     *
-     * @todo Identifiers can have Unicode "letters" in them; add support for those.
      */
     private function identifier()
     {
-        // Identifiers must start with a letter, _ or $.
-        $match = $this->match('/^[A-Za-z\_\$][A-Za-z0-9\_\$]*/u');
+        // Be careful when editing this regex, there are a couple Unicode characters in between here -------------vv
+        $match = $this->match('/^(?:[\$_\p{L}\p{Nl}]|\\\\u[0-9A-Fa-f]{4})(?:[\$_\p{L}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}‌‍]|\\\\u[0-9A-Fa-f]{4})*/u');
 
         if ($match === null) {
             $this->throwSyntaxError('Bad identifier as unquoted key');
         }
 
-        return $match;
+        // Un-escape escaped Unicode chars
+        $unescaped = preg_replace_callback('/\\\\u([0-9A-Fa-f]{4})/', function ($m) {
+            return Json5Decoder::fromCharCode($m[1]);
+        }, $match);
+
+        return $unescaped;
     }
 
     private function number()
