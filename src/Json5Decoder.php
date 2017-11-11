@@ -636,11 +636,11 @@ final class Json5Decoder
             case '\\': return '\\';
             case '/':  return '/';
             case "\n": return '';
-            case 'b':  return '\b';
-            case 'f':  return '\f';
-            case 'n':  return '\n';
-            case 'r':  return '\r';
-            case 't':  return '\t';
+            case 'b':  return chr(8);
+            case 'f':  return "\f";
+            case 'n':  return "\n";
+            case 'r':  return "\r";
+            case 't':  return "\t";
             default:   return null;
             // @codingStandardsIgnoreEnd
         }

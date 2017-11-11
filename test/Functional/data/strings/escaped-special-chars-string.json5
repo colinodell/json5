@@ -1,0 +1,10 @@
+{
+  'backspace': '\b',
+  'form_feed': '\f',
+  'carriage_return': '\r',
+  'tab': '\t',
+  'newline1': '\n',
+  'newline2': '\\n'
+}
+////////// EXPECTED OUTPUT: //////////O:8:"stdClass":6:{s:9:"backspace";s:1:"";s:9:"form_feed";s:1:"";s:15:"carriage_return";s:1:"";s:3:"tab";s:1:"	";s:8:"newline1";s:1:"
+";s:8:"newline2";s:2:"\n";}
