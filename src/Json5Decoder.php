@@ -220,8 +220,8 @@ final class Json5Decoder
         }
 
         // Un-escape escaped Unicode chars
-        $unescaped = preg_replace_callback('/\\\\u([0-9A-Fa-f]{4})/', function ($m) {
-            return self::fromCharCode($m[1]);
+        $unescaped = preg_replace_callback('/(?:\\\\u[0-9A-Fa-f]{4})+/', function ($m) {
+            return json_decode('"'.$m[0].'"');
         }, $match);
 
         return $unescaped;
@@ -323,16 +323,13 @@ final class Json5Decoder
 
                 return $string;
             } elseif ($this->ch === '\\') {
-                $this->next();
-                if ($this->ch === 'u') {
-                    $this->next();
-                    $hex = $this->match('/^[A-Fa-f0-9]{4}/');
-                    if ($hex === null) {
-                        break;
-                    }
-                    $string .= self::fromCharCode($hex);
+                if ($unicodeEscaped = $this->match('/^(?:\\\\u[A-Fa-f0-9]{4})+/')) {
+                    $string .= json_decode('"'.$unicodeEscaped.'"');
                     continue;
-                } elseif ($this->ch === "\r") {
+                }
+
+                $this->next();
+                if ($this->ch === "\r") {
                     if ($this->peek() === "\n") {
                         $this->next();
                     }
@@ -610,16 +607,6 @@ final class Json5Decoder
     private static function renderChar($chr)
     {
         return $chr === null ? 'EOF' : "'" . $chr . "'";
-    }
-
-    /**
-     * @param string $hex Hex code
-     *
-     * @return string Unicode character
-     */
-    private static function fromCharCode($hex)
-    {
-        return mb_convert_encoding('&#' . hexdec($hex) . ';', 'UTF-8', 'HTML-ENTITIES');
     }
 
     /**
