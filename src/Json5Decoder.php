@@ -364,10 +364,6 @@ final class Json5Decoder
      */
     private function inlineComment()
     {
-        if ($this->ch !== '/') {
-            $this->throwSyntaxError('Not an inline comment');
-        }
-
         do {
             $this->next();
             if ($this->ch === "\n" || $this->ch === "\r") {
@@ -387,10 +383,6 @@ final class Json5Decoder
      */
     private function blockComment()
     {
-        if ($this->ch !== '*') {
-            $this->throwSyntaxError('Not a block comment');
-        }
-
         do {
             $this->next();
             while ($this->ch === '*') {
