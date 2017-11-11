@@ -163,7 +163,7 @@ final class Json5Decoder
 
         $line = $this->lineCache[$this->lineNumber - 1];
 
-        return mb_substr($line, $this->columnNumber - 1, null, 'utf-8');
+        return mb_substr($line, $this->columnNumber - 1);
     }
 
     /**
