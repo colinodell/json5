@@ -60,7 +60,7 @@ $ composer require colinodell/json5
 This package adds a `json5_decode()` function which is a drop-in replacement for PHP's built-in `json_decode()`:
 
 ``` php
-$json = file_get_contents('foo.json');
+$json = file_get_contents('foo.json5');
 $arr = json5_decode($json);
 ```
 
