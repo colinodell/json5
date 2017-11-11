@@ -397,7 +397,7 @@ final class Json5Decoder
                     return;
                 }
             }
-        } while ($this->ch);
+        } while ($this->ch !== null);
 
         $this->throwSyntaxError('Unterminated block comment');
     }
@@ -432,7 +432,7 @@ final class Json5Decoder
      */
     private function white()
     {
-        while ($this->ch) {
+        while ($this->ch !== null) {
             if ($this->ch === '/') {
                 $this->comment();
             } elseif (preg_match(self::REGEX_WHITESPACE, $this->ch) === 1) {
@@ -533,7 +533,6 @@ final class Json5Decoder
      */
     private function obj()
     {
-        $key = null;
         $object = $this->associative ? array() : new \stdClass;
 
         if ($this->ch === '{') {
