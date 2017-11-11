@@ -309,10 +309,6 @@ final class Json5Decoder
 
     private function string()
     {
-        if (!($this->ch === '"' || $this->ch === "'")) {
-            $this->throwSyntaxError('Bad string');
-        }
-
         $string = '';
 
         $delim = $this->ch;
@@ -401,10 +397,6 @@ final class Json5Decoder
     private function comment()
     {
         // Comments always begin with a / character.
-        if ($this->ch !== '/') {
-            $this->throwSyntaxError('Not a comment');
-        }
-
         $this->next('/');
 
         if ($this->ch === '/') {
