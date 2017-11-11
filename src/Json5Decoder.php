@@ -16,8 +16,6 @@ namespace ColinODell\Json5;
 
 final class Json5Decoder
 {
-    const REGEX_WHITESPACE = '/[ \t\r\n\v\f\xA0\x{FEFF}]/u';
-
     private $json;
 
     private $at = 0;
@@ -422,7 +420,7 @@ final class Json5Decoder
         while ($this->ch !== null) {
             if ($this->ch === '/') {
                 $this->comment();
-            } elseif (preg_match(self::REGEX_WHITESPACE, $this->ch) === 1) {
+            } elseif (preg_match('/[ \t\r\n\v\f\xA0\x{FEFF}]/u', $this->ch) === 1) {
                 $this->next();
             } else {
                 return;
