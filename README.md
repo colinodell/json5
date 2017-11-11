@@ -1,10 +1,12 @@
 # JSON5 for PHP - JSON for Humans
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
+[![PHP 5.4+][ico-php]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status][ico-travis]][link-travis]
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
+[![SensioLabs Insight][ico-sensio]][link-sensio]
+![UTF-8 Compatible][ico-utf8]
 [![Total Downloads][ico-downloads]][link-downloads]
 
 
@@ -135,12 +137,16 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/colinodell/json5.svg?style=flat-square
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/colinodell/json5.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/colinodell/json5.svg?style=flat-square
+[ico-utf8]: https://img.shields.io/badge/utf--8-compatible-brightgreen.svg?style=flat-square
+[ico-sensio]: https://img.shields.io/sensiolabs/i/45decdff-5544-43c4-9547-61c9f514b121.svg?style=flat-square
+[ico-php]: https://img.shields.io/packagist/php-v/symfony/symfony.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/colinodell/json5
 [link-travis]: https://travis-ci.org/colinodell/json5
 [link-scrutinizer]: https://scrutinizer-ci.com/g/colinodell/json5/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/colinodell/json5
 [link-downloads]: https://packagist.org/packages/colinodell/json5
+[link-sensio]: https://insight.sensiolabs.com/projects/45decdff-5544-43c4-9547-61c9f514b121
 [link-author]: https://github.com/colinodell
 [link-json5]: https://github.com/json5/json5
 [link-php-jsondecode]: http://php.net/manual/en/function.json-decode.php
