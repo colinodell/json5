@@ -316,7 +316,8 @@ final class Json5Decoder
         $string = '';
 
         $delim = $this->ch;
-        while ($this->next() !== null) {
+        $this->next();
+        while ($this->ch !== null) {
             if ($this->ch === $delim) {
                 $this->next();
 
@@ -330,6 +331,7 @@ final class Json5Decoder
                         break;
                     }
                     $string .= self::fromCharCode($hex);
+                    continue;
                 } elseif ($this->ch === "\r") {
                     if ($this->peek() === "\n") {
                         $this->next();
@@ -347,6 +349,8 @@ final class Json5Decoder
             } else {
                 $string .= $this->ch;
             }
+
+            $this->next();
         }
 
         $this->throwSyntaxError('Bad string');
