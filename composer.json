@@ -1,7 +1,7 @@
 {
     "name": "colinodell/json5",
     "type": "library",
-    "description": "JSON5 - JSON for Humans",
+    "description": "UTF-8 compatible JSON5 parser for PHP",
     "keywords": [
         "json5",
         "json",
