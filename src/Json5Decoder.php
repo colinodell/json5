@@ -210,8 +210,10 @@ final class Json5Decoder
      */
     private function identifier()
     {
+        // @codingStandardsIgnoreStart
         // Be careful when editing this regex, there are a couple Unicode characters in between here -------------vv
         $match = $this->match('/^(?:[\$_\p{L}\p{Nl}]|\\\\u[0-9A-Fa-f]{4})(?:[\$_\p{L}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}‌‍]|\\\\u[0-9A-Fa-f]{4})*/u');
+        // @codingStandardsIgnoreEnd
 
         if ($match === null) {
             $this->throwSyntaxError('Bad identifier as unquoted key');
