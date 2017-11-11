@@ -19,11 +19,3 @@ if (!function_exists('json5_decode')) {
         return \ColinODell\Json5\Json5Decoder::decode($source, $associative, $depth, $options);
     }
 }
-
-// PHP 5.3 compatibility
-if (!defined('JSON_BIGINT_AS_STRING')) {
-    define('JSON_BIGINT_AS_STRING', 2);
-}
-if (!defined('JSON_OBJECT_AS_ARRAY')) {
-    define('JSON_OBJECT_AS_ARRAY', 1);
-}

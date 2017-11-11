@@ -179,7 +179,7 @@ final class Json5Decoder
     {
         $subject = $this->getLineRemainder();
 
-        $matches = array();
+        $matches = [];
         if (!preg_match($regex, $subject, $matches, PREG_OFFSET_CAPTURE)) {
             return null;
         }
@@ -221,7 +221,7 @@ final class Json5Decoder
 
         // Un-escape escaped Unicode chars
         $unescaped = preg_replace_callback('/\\\\u([0-9A-Fa-f]{4})/', function ($m) {
-            return Json5Decoder::fromCharCode($m[1]);
+            return self::fromCharCode($m[1]);
         }, $match);
 
         return $unescaped;
@@ -490,7 +490,7 @@ final class Json5Decoder
 
     private function arr()
     {
-        $arr = array();
+        $arr = [];
 
         if ($this->ch === '[') {
             if (++$this->depth > $this->maxDepth) {
@@ -533,7 +533,7 @@ final class Json5Decoder
      */
     private function obj()
     {
-        $object = $this->associative ? array() : new \stdClass;
+        $object = $this->associative ? [] : new \stdClass;
 
         if ($this->ch === '{') {
             if (++$this->depth > $this->maxDepth) {
