@@ -127,4 +127,3 @@ class BinTest extends TestCase
         return $command;
     }
 }
-
