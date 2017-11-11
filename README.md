@@ -139,7 +139,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-downloads]: https://img.shields.io/packagist/dt/colinodell/json5.svg?style=flat-square
 [ico-utf8]: https://img.shields.io/badge/utf--8-compatible-brightgreen.svg?style=flat-square
 [ico-sensio]: https://img.shields.io/sensiolabs/i/45decdff-5544-43c4-9547-61c9f514b121.svg?style=flat-square
-[ico-php]: https://img.shields.io/packagist/php-v/symfony/symfony.svg?style=flat-square
+[ico-php]: https://img.shields.io/packagist/php-v/colinodell/json5.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/colinodell/json5
 [link-travis]: https://travis-ci.org/colinodell/json5
