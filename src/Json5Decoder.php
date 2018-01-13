@@ -109,24 +109,10 @@ final class Json5Decoder
     /**
      * Parse the next character.
      *
-     * If $c is given, the next char will only be parsed if the current
-     * one matches $c.
-     *
-     * @param string|null $c
-     *
      * @return null|string
      */
-    private function next($c = null)
+    private function next()
     {
-        // If a c parameter is provided, verify that it matches the current character.
-        if ($c !== null && $c !== $this->ch) {
-            $this->throwSyntaxError(sprintf(
-                'Expected %s instead of %s',
-                self::renderChar($c),
-                self::renderChar($this->ch)
-            ));
-        }
-
         // Get the next character. When there are no more characters,
         // return the empty string.
         if ($this->ch === "\n" || ($this->ch === "\r" && $this->peek() !== "\n")) {
@@ -141,6 +127,26 @@ final class Json5Decoder
         $this->ch = $this->charAt($this->at);
 
         return $this->ch;
+    }
+
+    /**
+     * Parse the next character if it matches $c or fail.
+     *
+     * @param string $c
+     *
+     * @return string|null
+     */
+    private function nextOrFail($c)
+    {
+        if ($c !== $this->ch) {
+            $this->throwSyntaxError(sprintf(
+                'Expected %s instead of %s',
+                self::renderChar($c),
+                self::renderChar($this->ch)
+            ));
+        }
+
+        return $this->next();
     }
 
     /**
@@ -224,7 +230,7 @@ final class Json5Decoder
 
         if ($this->ch === '-' || $this->ch === '+') {
             $sign = $this->ch;
-            $this->next($this->ch);
+            $this->next();
         }
 
         // support for Infinity
@@ -369,9 +375,9 @@ final class Json5Decoder
         do {
             $this->next();
             while ($this->ch === '*') {
-                $this->next('*');
+                $this->nextOrFail('*');
                 if ($this->ch === '/') {
-                    $this->next('/');
+                    $this->nextOrFail('/');
 
                     return;
                 }
@@ -387,7 +393,7 @@ final class Json5Decoder
     private function comment()
     {
         // Comments always begin with a / character.
-        $this->next('/');
+        $this->nextOrFail('/');
 
         if ($this->ch === '/') {
             $this->inlineComment();
@@ -425,38 +431,38 @@ final class Json5Decoder
     {
         switch ($this->ch) {
             case 't':
-                $this->next('t');
-                $this->next('r');
-                $this->next('u');
-                $this->next('e');
+                $this->nextOrFail('t');
+                $this->nextOrFail('r');
+                $this->nextOrFail('u');
+                $this->nextOrFail('e');
                 return true;
             case 'f':
-                $this->next('f');
-                $this->next('a');
-                $this->next('l');
-                $this->next('s');
-                $this->next('e');
+                $this->nextOrFail('f');
+                $this->nextOrFail('a');
+                $this->nextOrFail('l');
+                $this->nextOrFail('s');
+                $this->nextOrFail('e');
                 return false;
             case 'n':
-                $this->next('n');
-                $this->next('u');
-                $this->next('l');
-                $this->next('l');
+                $this->nextOrFail('n');
+                $this->nextOrFail('u');
+                $this->nextOrFail('l');
+                $this->nextOrFail('l');
                 return null;
             case 'I':
-                $this->next('I');
-                $this->next('n');
-                $this->next('f');
-                $this->next('i');
-                $this->next('n');
-                $this->next('i');
-                $this->next('t');
-                $this->next('y');
+                $this->nextOrFail('I');
+                $this->nextOrFail('n');
+                $this->nextOrFail('f');
+                $this->nextOrFail('i');
+                $this->nextOrFail('n');
+                $this->nextOrFail('i');
+                $this->nextOrFail('t');
+                $this->nextOrFail('y');
                 return INF;
             case 'N':
-                $this->next('N');
-                $this->next('a');
-                $this->next('N');
+                $this->nextOrFail('N');
+                $this->nextOrFail('a');
+                $this->nextOrFail('N');
                 return NAN;
         }
 
@@ -472,11 +478,11 @@ final class Json5Decoder
                 $this->throwSyntaxError('Maximum stack depth exceeded');
             }
 
-            $this->next('[');
+            $this->nextOrFail('[');
             $this->white();
             while ($this->ch !== null) {
                 if ($this->ch === ']') {
-                    $this->next(']');
+                    $this->nextOrFail(']');
                     $this->depth--;
                     return $arr; // Potentially empty array
                 }
@@ -492,11 +498,11 @@ final class Json5Decoder
                 // If there's no comma after this value, this needs to
                 // be the end of the array.
                 if ($this->ch !== ',') {
-                    $this->next(']');
+                    $this->nextOrFail(']');
                     $this->depth--;
                     return $arr;
                 }
-                $this->next(',');
+                $this->nextOrFail(',');
                 $this->white();
             }
         }
@@ -516,11 +522,11 @@ final class Json5Decoder
                 $this->throwSyntaxError('Maximum stack depth exceeded');
             }
 
-            $this->next('{');
+            $this->nextOrFail('{');
             $this->white();
             while ($this->ch) {
                 if ($this->ch === '}') {
-                    $this->next('}');
+                    $this->nextOrFail('}');
                     $this->depth--;
                     return $object; // Potentially empty object
                 }
@@ -534,7 +540,7 @@ final class Json5Decoder
                 }
 
                 $this->white();
-                $this->next(':');
+                $this->nextOrFail(':');
                 if ($this->associative) {
                     $object[$key] = $this->value();
                 } else {
@@ -544,11 +550,11 @@ final class Json5Decoder
                 // If there's no comma after this pair, this needs to be
                 // the end of the object.
                 if ($this->ch !== ',') {
-                    $this->next('}');
+                    $this->nextOrFail('}');
                     $this->depth--;
                     return $object;
                 }
-                $this->next(',');
+                $this->nextOrFail(',');
                 $this->white();
             }
         }
