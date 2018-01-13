@@ -16,8 +16,6 @@ namespace ColinODell\Json5;
 
 final class Json5Decoder
 {
-    private $json;
-
     private $at = 0;
 
     private $lineNumber = 1;
@@ -38,6 +36,10 @@ final class Json5Decoder
 
     private $length;
 
+    private $remainderCache;
+
+    private $remainderCacheAt;
+
     /**
      * Private constructor.
      *
@@ -48,7 +50,6 @@ final class Json5Decoder
      */
     private function __construct($json, $associative = false, $depth = 512, $castBigIntToString = false)
     {
-        $this->json = $json;
         $this->associative = $associative;
         $this->maxDepth = $depth;
         $this->castBigIntToString = $castBigIntToString;
@@ -57,6 +58,9 @@ final class Json5Decoder
 
         $this->chArr = preg_split('//u', $json, null, PREG_SPLIT_NO_EMPTY);
         $this->ch = $this->charAt(0);
+
+        $this->remainderCache = $json;
+        $this->remainderCacheAt = 0;
     }
 
     /**
@@ -161,7 +165,7 @@ final class Json5Decoder
      */
     private function match($regex)
     {
-        $subject = mb_substr($this->json, $this->at);
+        $subject = $this->getRemainder();
 
         $matches = [];
         if (!preg_match($regex, $subject, $matches, PREG_OFFSET_CAPTURE)) {
@@ -610,5 +614,26 @@ final class Json5Decoder
             default:   return null;
             // @codingStandardsIgnoreEnd
         }
+    }
+
+    /**
+     * Returns everything from $this->at onwards.
+     *
+     * Utilizes a cache so we don't have to continuously parse through UTF-8
+     * data that was earlier in the string which we don't even care about.
+     *
+     * @return string
+     */
+    private function getRemainder()
+    {
+        if ($this->remainderCacheAt === $this->at) {
+            return $this->remainderCache;
+        }
+
+        $subject = mb_substr($this->remainderCache, $this->at - $this->remainderCacheAt);
+        $this->remainderCache = $subject;
+        $this->remainderCacheAt = $this->at;
+
+        return $subject;
     }
 }
