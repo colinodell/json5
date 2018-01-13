@@ -262,10 +262,10 @@ final class Json5Decoder
 
         switch ($base) {
             case 10:
-                if (($match = $this->match('/^\d*\.?\d*/')) !== null) {
+                if ((is_numeric($this->ch) || $this->ch === '.') && ($match = $this->match('/^\d*\.?\d*/')) !== null) {
                     $string .= $match;
                 }
-                if (($match = $this->match('/^[Ee][-+]?\d*/')) !== null) {
+                if (($this->ch === 'E' || $this->ch === 'e') && ($match = $this->match('/^[Ee][-+]?\d*/')) !== null) {
                     $string .= $match;
                 }
                 $number = $string;
@@ -309,7 +309,7 @@ final class Json5Decoder
             }
 
             if ($this->ch === '\\') {
-                if ($unicodeEscaped = $this->match('/^(?:\\\\u[A-Fa-f0-9]{4})+/')) {
+                if ($this->peek() === 'u' && $unicodeEscaped = $this->match('/^(?:\\\\u[A-Fa-f0-9]{4})+/')) {
                     $string .= json_decode('"'.$unicodeEscaped.'"');
                     continue;
                 }
