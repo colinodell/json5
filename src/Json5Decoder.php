@@ -26,6 +26,8 @@ final class Json5Decoder
 
     private $ch;
 
+    private $chArr;
+
     private $associative = false;
 
     private $maxDepth = 512;
@@ -35,8 +37,6 @@ final class Json5Decoder
     private $depth = 1;
 
     private $length;
-
-    private $lineCache;
 
     /**
      * Private constructor.
@@ -55,6 +55,7 @@ final class Json5Decoder
 
         $this->length = mb_strlen($json, 'utf-8');
 
+        $this->chArr = preg_split('//u', $json, null, PREG_SPLIT_NO_EMPTY);
         $this->ch = $this->charAt(0);
     }
 
@@ -98,7 +99,7 @@ final class Json5Decoder
             return null;
         }
 
-        return mb_substr($this->json, $at, 1, 'utf-8');
+        return $this->chArr[$at];
     }
 
     /**
@@ -150,21 +151,6 @@ final class Json5Decoder
     }
 
     /**
-     * @return string
-     */
-    private function getLineRemainder()
-    {
-        // Line are separated by "\n" or "\r" without an "\n" next
-        if ($this->lineCache === null) {
-            $this->lineCache = preg_split('/\n|\r\n?/u', $this->json);
-        }
-
-        $line = $this->lineCache[$this->lineNumber - 1];
-
-        return mb_substr($line, $this->columnNumber - 1);
-    }
-
-    /**
      * Attempt to match a regular expression at the current position on the current line.
      *
      * This function will not match across multiple lines.
@@ -175,7 +161,7 @@ final class Json5Decoder
      */
     private function match($regex)
     {
-        $subject = $this->getLineRemainder();
+        $subject = mb_substr($this->json, $this->at);
 
         $matches = [];
         if (!preg_match($regex, $subject, $matches, PREG_OFFSET_CAPTURE)) {
