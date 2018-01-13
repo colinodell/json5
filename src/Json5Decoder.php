@@ -99,7 +99,7 @@ final class Json5Decoder
      */
     private function charAt($at)
     {
-        if ($at < 0 || $at >= $this->length) {
+        if ($at >= $this->length) {
             return null;
         }
 
