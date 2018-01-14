@@ -245,10 +245,7 @@ final class Json5Decoder
 
         // support for Infinity
         if ($this->ch === 'I') {
-            $number = $this->word();
-            if ($number === null) {
-                $this->throwSyntaxError('Unexpected word for number');
-            }
+            $this->word();
 
             return ($sign === '-') ? -INF : INF;
         }
@@ -256,9 +253,6 @@ final class Json5Decoder
         // support for NaN
         if ($this->ch === 'N') {
             $number = $this->word();
-            if ($number !== NAN) {
-                $this->throwSyntaxError('expected word to be NaN');
-            }
 
             // ignore sign as -NaN also is NaN
             return $number;
@@ -483,41 +477,37 @@ final class Json5Decoder
     {
         $arr = [];
 
-        if ($this->ch === '[') {
-            if (++$this->depth > $this->maxDepth) {
-                $this->throwSyntaxError('Maximum stack depth exceeded');
-            }
-
-            $this->nextOrFail('[');
-            $this->white();
-            while ($this->ch !== null) {
-                if ($this->ch === ']') {
-                    $this->nextOrFail(']');
-                    $this->depth--;
-                    return $arr; // Potentially empty array
-                }
-                // ES5 allows omitting elements in arrays, e.g. [,] and
-                // [,null]. We don't allow this in JSON5.
-                if ($this->ch === ',') {
-                    $this->throwSyntaxError('Missing array element');
-                }
-
-                $arr[] = $this->value();
-
-                $this->white();
-                // If there's no comma after this value, this needs to
-                // be the end of the array.
-                if ($this->ch !== ',') {
-                    $this->nextOrFail(']');
-                    $this->depth--;
-                    return $arr;
-                }
-                $this->nextOrFail(',');
-                $this->white();
-            }
+        if (++$this->depth > $this->maxDepth) {
+            $this->throwSyntaxError('Maximum stack depth exceeded');
         }
 
-        $this->throwSyntaxError('Bad array');
+        $this->nextOrFail('[');
+        $this->white();
+        while ($this->ch !== null) {
+            if ($this->ch === ']') {
+                $this->nextOrFail(']');
+                $this->depth--;
+                return $arr; // Potentially empty array
+            }
+            // ES5 allows omitting elements in arrays, e.g. [,] and
+            // [,null]. We don't allow this in JSON5.
+            if ($this->ch === ',') {
+                $this->throwSyntaxError('Missing array element');
+            }
+
+            $arr[] = $this->value();
+
+            $this->white();
+            // If there's no comma after this value, this needs to
+            // be the end of the array.
+            if ($this->ch !== ',') {
+                $this->nextOrFail(']');
+                $this->depth--;
+                return $arr;
+            }
+            $this->nextOrFail(',');
+            $this->white();
+        }
     }
 
     /**
@@ -527,49 +517,45 @@ final class Json5Decoder
     {
         $object = $this->associative ? [] : new \stdClass;
 
-        if ($this->ch === '{') {
-            if (++$this->depth > $this->maxDepth) {
-                $this->throwSyntaxError('Maximum stack depth exceeded');
-            }
-
-            $this->nextOrFail('{');
-            $this->white();
-            while ($this->ch) {
-                if ($this->ch === '}') {
-                    $this->nextOrFail('}');
-                    $this->depth--;
-                    return $object; // Potentially empty object
-                }
-
-                // Keys can be unquoted. If they are, they need to be
-                // valid JS identifiers.
-                if ($this->ch === '"' || $this->ch === "'") {
-                    $key = $this->string();
-                } else {
-                    $key = $this->identifier();
-                }
-
-                $this->white();
-                $this->nextOrFail(':');
-                if ($this->associative) {
-                    $object[$key] = $this->value();
-                } else {
-                    $object->{$key} = $this->value();
-                }
-                $this->white();
-                // If there's no comma after this pair, this needs to be
-                // the end of the object.
-                if ($this->ch !== ',') {
-                    $this->nextOrFail('}');
-                    $this->depth--;
-                    return $object;
-                }
-                $this->nextOrFail(',');
-                $this->white();
-            }
+        if (++$this->depth > $this->maxDepth) {
+            $this->throwSyntaxError('Maximum stack depth exceeded');
         }
 
-        $this->throwSyntaxError('Bad object');
+        $this->nextOrFail('{');
+        $this->white();
+        while ($this->ch !== null) {
+            if ($this->ch === '}') {
+                $this->nextOrFail('}');
+                $this->depth--;
+                return $object; // Potentially empty object
+            }
+
+            // Keys can be unquoted. If they are, they need to be
+            // valid JS identifiers.
+            if ($this->ch === '"' || $this->ch === "'") {
+                $key = $this->string();
+            } else {
+                $key = $this->identifier();
+            }
+
+            $this->white();
+            $this->nextOrFail(':');
+            if ($this->associative) {
+                $object[$key] = $this->value();
+            } else {
+                $object->{$key} = $this->value();
+            }
+            $this->white();
+            // If there's no comma after this pair, this needs to be
+            // the end of the object.
+            if ($this->ch !== ',') {
+                $this->nextOrFail('}');
+                $this->depth--;
+                return $object;
+            }
+            $this->nextOrFail(',');
+            $this->white();
+        }
     }
 
     /**

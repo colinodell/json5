@@ -155,6 +155,23 @@ class ParseTest extends TestCase
         return $tests;
     }
 
+    public function testNaNWithSign()
+    {
+        $this->assertTrue(is_nan(Json5Decoder::decode('+NaN')));
+    }
+
+    public function testBadNumberStartingWithN()
+    {
+        $this->setExpectedException('ColinODell\\Json5\\SyntaxError');
+        Json5Decoder::decode('NotANumber');
+    }
+
+    public function testBadNumberStartingWithI()
+    {
+        $this->setExpectedException('ColinODell\\Json5\\SyntaxError');
+        Json5Decoder::decode('+Indigo');
+    }
+
     private function getErrorSpec($file)
     {
         $errorSpec = str_replace('.txt', '.errorSpec', $file);
