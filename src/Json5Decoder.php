@@ -246,9 +246,6 @@ final class Json5Decoder
         // support for Infinity
         if ($this->ch === 'I') {
             $number = $this->word();
-            if ($number === null) {
-                $this->throwSyntaxError('Unexpected word for number');
-            }
 
             return ($sign === '-') ? -INF : INF;
         }
@@ -256,9 +253,6 @@ final class Json5Decoder
         // support for NaN
         if ($this->ch === 'N') {
             $number = $this->word();
-            if ($number !== NAN) {
-                $this->throwSyntaxError('expected word to be NaN');
-            }
 
             // ignore sign as -NaN also is NaN
             return $number;
