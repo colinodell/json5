@@ -155,9 +155,9 @@ class ParseTest extends TestCase
         return $tests;
     }
 
-    public function testNaN()
+    public function testNaNWithSign()
     {
-        $this->assertTrue(is_nan(Json5Decoder::decode('NaN')));
+        $this->assertTrue(is_nan(Json5Decoder::decode('+NaN')));
     }
 
     public function testBadNumberStartingWithN()

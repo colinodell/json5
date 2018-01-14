@@ -245,7 +245,7 @@ final class Json5Decoder
 
         // support for Infinity
         if ($this->ch === 'I') {
-            $number = $this->word();
+            $this->word();
 
             return ($sign === '-') ? -INF : INF;
         }
@@ -523,7 +523,7 @@ final class Json5Decoder
 
         $this->nextOrFail('{');
         $this->white();
-        while ($this->ch) {
+        while ($this->ch !== null) {
             if ($this->ch === '}') {
                 $this->nextOrFail('}');
                 $this->depth--;
