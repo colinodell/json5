@@ -25,7 +25,7 @@ class OptionsTest extends TestCase
     public function testAssocFalseWithAssocOption()
     {
         $result = Json5Decoder::decode('{"foo": true}', false, 512, JSON_OBJECT_AS_ARRAY);
-        $this->assertInternalType('array', $result);
+        $this->assertInstanceOf('\stdClass', $result);
     }
 
     public function testBigIntWithNoOptionsSet()
