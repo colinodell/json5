@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased][unreleased]
 
+## [1.0.3] - 2018-01-14
+### Fixed
+ - Fixed check for PHP 7+
+
 ## [1.0.2] - 2018-01-14
 This release contains massive performance improvements of 98% or more, especially for larger JSON inputs!
 
@@ -24,6 +28,7 @@ This release contains massive performance improvements of 98% or more, especiall
 ### Added
  - Initial commit
 
-[unreleased]: https://github.com/colinodell/json5/compare/1.0.2...HEAD
+[unreleased]: https://github.com/colinodell/json5/compare/1.0.3...HEAD
+[1.0.3]: https://github.com/colinodell/json5/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/colinodell/json5/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/colinodell/json5/compare/1.0.0...1.0.1
