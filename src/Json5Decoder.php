@@ -78,6 +78,16 @@ final class Json5Decoder
      */
     public static function decode($source, $associative = false, $depth = 512, $options = 0)
     {
+        // Try parsing with json_decode first, since that's much faster
+        // We only attempt this on PHP 7+ because 5.x doesn't parse some edge cases correctly
+        if (PHP_VERSION_ID >= 700000) {
+            $result = json_decode($source, $associative, $depth, $options);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                return $result;
+            }
+        }
+
+        // Fall back to JSON5 if that fails
         $associative = $associative || ($options & JSON_OBJECT_AS_ARRAY);
         $castBigIntToString = $options & JSON_BIGINT_AS_STRING;
 

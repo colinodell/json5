@@ -66,6 +66,8 @@ $arr = json5_decode($json);
 
 It takes the same exact parameters in the same order.  For more details on these, see the [PHP docs][link-php-jsondecode].
 
+To achieve the best possible performance, it'll try parsing with PHP's native function (which usually fails fast) and then falls back to JSON5.
+
 ## Binary / Executable
 
 A binary/executable named `json5` is also provided for converting JSON5 to plain JSON via your terminal.
