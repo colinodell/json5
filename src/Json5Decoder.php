@@ -88,7 +88,7 @@ final class Json5Decoder
         }
 
         // Fall back to JSON5 if that fails
-        $associative = $associative || ($options & JSON_OBJECT_AS_ARRAY);
+        $associative = $associative === true || ($associative === null && $options & JSON_OBJECT_AS_ARRAY);
         $castBigIntToString = $options & JSON_BIGINT_AS_STRING;
 
         $decoder = new self((string)$source, $associative, $depth, $castBigIntToString);
