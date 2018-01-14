@@ -26,8 +26,6 @@ final class Json5Decoder
 
     private $lineNumber = 1;
 
-    private $column = 1;
-
     private $associative = false;
 
     private $maxDepth = 512;
@@ -35,6 +33,8 @@ final class Json5Decoder
     private $castBigIntToString = false;
 
     private $depth = 1;
+
+    private $currentLineStartsAt = 0;
 
     /**
      * Private constructor.
@@ -131,9 +131,7 @@ final class Json5Decoder
         // return the empty string.
         if ($this->currentByte === "\n" || ($this->currentByte === "\r" && $this->peek() !== "\n")) {
             $this->lineNumber++;
-            $this->column = 1;
-        } else {
-            $this->column++;
+            $this->currentLineStartsAt = $this->at + 1;
         }
 
         $this->at++;
@@ -194,7 +192,6 @@ final class Json5Decoder
         }
 
         $this->at += $matches[0][1] + strlen($matches[0][0]);
-        $this->column += mb_strlen(substr($subject, 0, $matches[0][1]) . $matches[0][0]);
         $this->currentByte = $this->getByte($this->at);
 
         return $matches[0][0];
@@ -588,7 +585,11 @@ final class Json5Decoder
 
     private function throwSyntaxError($message)
     {
-        throw new SyntaxError($message, $this->lineNumber, $this->column);
+        // Calculate the column number
+        $str = substr($this->json, $this->currentLineStartsAt, $this->at - $this->currentLineStartsAt);
+        $column = mb_strlen($str) + 1;
+
+        throw new SyntaxError($message, $this->lineNumber, $column);
     }
 
     private static function renderChar($chr)
