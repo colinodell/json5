@@ -172,6 +172,16 @@ class ParseTest extends TestCase
         Json5Decoder::decode('+Indigo');
     }
 
+    public function testNonBreakingSpaceInISO8859()
+    {
+        $this->assertSame(3, Json5Decoder::decode(chr(0xA0) . ' 3 '));
+    }
+
+    public function testNonBreakingSpaceInUTF8()
+    {
+        $this->assertSame(3, Json5Decoder::decode(chr(0xC2) . chr(0xA0) . ' 3 '));
+    }
+
     private function getErrorSpec($file)
     {
         $errorSpec = str_replace('.txt', '.errorSpec', $file);
