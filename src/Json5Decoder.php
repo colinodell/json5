@@ -267,12 +267,14 @@ final class Json5Decoder
 
         switch ($base) {
             case 10:
+                // @codingStandardsIgnoreStart
                 if ((is_numeric($this->currentByte) || $this->currentByte === '.') && ($match = $this->match('/^\d*\.?\d*/')) !== null) {
                     $string .= $match;
                 }
                 if (($this->currentByte === 'E' || $this->currentByte === 'e') && ($match = $this->match('/^[Ee][-+]?\d*/')) !== null) {
                     $string .= $match;
                 }
+                // @codingStandardsIgnoreEnd
                 $number = $string;
                 break;
             case 16:
