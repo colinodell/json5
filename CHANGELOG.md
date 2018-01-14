@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased][unreleased]
 
+## [1.0.4] - 2018-01-14
+### Changed
+ - Modified the internal pointer and string manipulations to use bytes instead of characters for better performance (#4)
+
 ## [1.0.3] - 2018-01-14
 ### Fixed
  - Fixed check for PHP 7+
@@ -28,7 +32,8 @@ This release contains massive performance improvements of 98% or more, especiall
 ### Added
  - Initial commit
 
-[unreleased]: https://github.com/colinodell/json5/compare/1.0.3...HEAD
+[unreleased]: https://github.com/colinodell/json5/compare/1.0.4...HEAD
+[1.0.4]: https://github.com/colinodell/json5/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/colinodell/json5/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/colinodell/json5/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/colinodell/json5/compare/1.0.0...1.0.1
