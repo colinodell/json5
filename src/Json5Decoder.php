@@ -418,7 +418,11 @@ final class Json5Decoder
         while ($this->currentByte !== null) {
             if ($this->currentByte === '/') {
                 $this->comment();
-            } elseif (preg_match('/[ \t\r\n\v\f\xA0\x{FEFF}]/u', $this->currentByte) === 1) {
+            } elseif (preg_match('/^[ \t\r\n\v\f\xA0]/', $this->currentByte) === 1) {
+                $this->next();
+            } elseif (ord($this->currentByte) === 0xC2 && ord($this->peek()) === 0xA0) {
+                // Non-breaking space in UTF-8
+                $this->next();
                 $this->next();
             } else {
                 return;
