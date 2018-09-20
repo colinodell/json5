@@ -35,9 +35,9 @@ This release contains massive performance improvements of 98% or more, especiall
 ### Added
  - Initial commit
 
-[unreleased]: https://github.com/colinodell/json5/compare/1.0.5...HEAD
-[1.0.5]: https://github.com/colinodell/json5/compare/1.0.4...1.0.5
-[1.0.4]: https://github.com/colinodell/json5/compare/1.0.3...1.0.4
-[1.0.3]: https://github.com/colinodell/json5/compare/1.0.2...1.0.3
-[1.0.2]: https://github.com/colinodell/json5/compare/1.0.1...1.0.2
-[1.0.1]: https://github.com/colinodell/json5/compare/1.0.0...1.0.1
+[unreleased]: https://github.com/colinodell/json5/compare/v1.0.5...HEAD
+[1.0.5]: https://github.com/colinodell/json5/compare/v1.0.4...v1.0.5
+[1.0.4]: https://github.com/colinodell/json5/compare/v1.0.3...v1.0.4
+[1.0.3]: https://github.com/colinodell/json5/compare/v1.0.2...v1.0.3
+[1.0.2]: https://github.com/colinodell/json5/compare/v1.0.1...v1.0.2
+[1.0.1]: https://github.com/colinodell/json5/compare/v1.0.0...v1.0.1
