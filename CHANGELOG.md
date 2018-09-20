@@ -5,6 +5,8 @@ All notable changes to `colinodell/json5` will be documented in this file.
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
 ## [Unreleased][unreleased]
+### Fixed
+ - Fixed exceptions not being thrown for incomplete objects/arrays
 
 ## [1.0.4] - 2018-01-14
 ### Changed

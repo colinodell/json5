@@ -509,6 +509,8 @@ final class Json5Decoder
             $this->nextOrFail(',');
             $this->white();
         }
+
+        $this->throwSyntaxError('Invalid array');
     }
 
     /**
@@ -557,6 +559,8 @@ final class Json5Decoder
             $this->nextOrFail(',');
             $this->white();
         }
+
+        $this->throwSyntaxError('Invalid object');
     }
 
     /**
