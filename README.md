@@ -70,7 +70,7 @@ To achieve the best possible performance, it'll try parsing with PHP's native fu
 
 ### Exceptions
 
-This function will **always** throw a `SyntaxException` if parsing fails.  This is a subclass of the new `\JsonException` introduced in PHP 7.3.
+This function will **always** throw a `SyntaxError` exception if parsing fails.  This is a subclass of the new `\JsonException` introduced in PHP 7.3.
 Providing or omitting the `JSON_THROW_ON_ERROR` option will have no effect on this behavior.
 
 For users on PHP 7.2 and below: a PHP 7.3 polyfill is included with this library so that you can safely reference `\JsonException` and `JSON_THROW_ON_ERROR` in your own code.

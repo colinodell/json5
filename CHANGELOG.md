@@ -10,7 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
  - Added a polyfill for class `\JsonException` (added in PHP 7.3)
  - Added a polyfill for constant `JSON_THROW_ON_ERROR`
 ### Changed
- - The `SyntaxException` class now extends from `\JsonException`
+ - The `SyntaxError` class now extends from `\JsonException`
 
 ## [1.0.5] - 2018-09-20
 ### Fixed
