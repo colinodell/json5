@@ -182,6 +182,16 @@ class ParseTest extends TestCase
         $this->assertSame(3, Json5Decoder::decode(chr(0xC2) . chr(0xA0) . ' 3 '));
     }
 
+    public function testExceptionType()
+    {
+        try {
+            Json5Decoder::decode('{');
+            $this->fail('Exception should have been thrown');
+        } catch (\Exception $ex) {
+            $this->assertSame('ColinODell\\Json5\\SyntaxError', get_class($ex));
+        }
+    }
+
     private function getErrorSpec($file)
     {
         $errorSpec = str_replace('.txt', '.errorSpec', $file);
