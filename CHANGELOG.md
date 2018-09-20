@@ -5,6 +5,7 @@ All notable changes to `colinodell/json5` will be documented in this file.
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
 ## [Unreleased][unreleased]
+## [1.0.5] - 2018-09-20
 ### Fixed
  - Fixed exceptions not being thrown for incomplete objects/arrays
 
@@ -34,7 +35,8 @@ This release contains massive performance improvements of 98% or more, especiall
 ### Added
  - Initial commit
 
-[unreleased]: https://github.com/colinodell/json5/compare/1.0.4...HEAD
+[unreleased]: https://github.com/colinodell/json5/compare/1.0.5...HEAD
+[1.0.5]: https://github.com/colinodell/json5/compare/1.0.4...1.0.5
 [1.0.4]: https://github.com/colinodell/json5/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/colinodell/json5/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/colinodell/json5/compare/1.0.1...1.0.2
