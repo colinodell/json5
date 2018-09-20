@@ -14,7 +14,7 @@
 
 namespace ColinODell\Json5;
 
-final class SyntaxError extends \RuntimeException
+final class SyntaxError extends \JsonException
 {
     /** @var int */
     private $lineNumber;

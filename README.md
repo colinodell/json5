@@ -68,6 +68,13 @@ It takes the same exact parameters in the same order.  For more details on these
 
 To achieve the best possible performance, it'll try parsing with PHP's native function (which usually fails fast) and then falls back to JSON5.
 
+### Exceptions
+
+This function will **always** throw a `SyntaxException` if parsing fails.  This is a subclass of the new `\JsonException` introduced in PHP 7.3.
+Providing or omitting the `JSON_THROW_ON_ERROR` option will have no effect on this behavior.
+
+For users on PHP 7.2 and below: a PHP 7.3 polyfill is included with this library so that you can safely reference `\JsonException` and `JSON_THROW_ON_ERROR` in your own code.
+
 ## Binary / Executable
 
 A binary/executable named `json5` is also provided for converting JSON5 to plain JSON via your terminal.

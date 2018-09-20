@@ -5,6 +5,13 @@ All notable changes to `colinodell/json5` will be documented in this file.
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
 ## [Unreleased][unreleased]
+
+### Added
+ - Added a polyfill for class `\JsonException` (added in PHP 7.3)
+ - Added a polyfill for constant `JSON_THROW_ON_ERROR`
+### Changed
+ - The `SyntaxException` class now extends from `\JsonException`
+
 ## [1.0.5] - 2018-09-20
 ### Fixed
  - Fixed exceptions not being thrown for incomplete objects/arrays

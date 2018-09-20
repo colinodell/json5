@@ -192,6 +192,7 @@ class ParseTest extends TestCase
             Json5Decoder::decode('{');
             $this->fail('Exception should have been thrown');
         } catch (\Exception $ex) {
+            $this->assertTrue(is_subclass_of($ex, 'JsonException'));
             $this->assertSame('ColinODell\\Json5\\SyntaxError', get_class($ex));
         }
     }
