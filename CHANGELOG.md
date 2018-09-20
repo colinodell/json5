@@ -6,6 +6,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased][unreleased]
 
+## [2.0.0] - 2018-09-20
 ### Added
  - Added a polyfill for class `\JsonException` (added in PHP 7.3)
  - Added a polyfill for constant `JSON_THROW_ON_ERROR`
