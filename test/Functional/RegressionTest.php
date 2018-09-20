@@ -22,16 +22,20 @@ class RegressionTest extends TestCase
         $this->assertSame(array(0), json5_decode($json));
     }
 
+    /**
+     * @expectedException \ColinODell\Json5\SyntaxError
+     */
     public function testOpenCurlyBraceOnly()
     {
-        $this->setExpectedException('ColinODell\\Json5\\SyntaxError');
         json5_decode('{');
         $this->fail('Should have thrown a syntax error');
     }
 
+    /**
+     * @expectedException \ColinODell\Json5\SyntaxError
+     */
     public function testOpenSquareBraceOnly()
     {
-        $this->setExpectedException('ColinODell\\Json5\\SyntaxError');
         json5_decode('[');
         $this->fail('Should have thrown a syntax error');
     }

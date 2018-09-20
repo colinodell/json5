@@ -16,15 +16,21 @@ use PHPUnit\Framework\TestCase;
 
 class MaximumDepthTest extends TestCase
 {
+    /**
+     * @expectedException \ColinODell\Json5\SyntaxError
+     * @expectedExceptionMessage Maximum stack depth exceeded
+     */
     public function testMaximumDepthWithArray()
     {
-        $this->setExpectedException('ColinODell\\Json5\\SyntaxError', 'Maximum stack depth exceeded');
         Json5Decoder::decode('[[1]]', false, 2);
     }
 
+    /**
+     * @expectedException \ColinODell\Json5\SyntaxError
+     * @expectedExceptionMessage Maximum stack depth exceeded
+     */
     public function testMaximumDepthWithObject()
     {
-        $this->setExpectedException('ColinODell\\Json5\\SyntaxError', 'Maximum stack depth exceeded');
         Json5Decoder::decode('{"foo": {"bar": "baz"}}', false, 2);
     }
 
