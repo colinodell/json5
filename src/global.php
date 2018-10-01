@@ -27,5 +27,7 @@ if (!defined('JSON_THROW_ON_ERROR')) {
 }
 
 if (!class_exists('JsonException')) {
-    class JsonException extends Exception {}
+    class JsonException extends Exception
+    {
+    }
 }

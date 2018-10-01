@@ -8,12 +8,19 @@ php:
   - "7.1"
   - "7.2"
   - "master"
+env:
+  - 'PHPCS=true PHPUNIT=true'
 
 matrix:
   include:
     - php: 5.4
       dist: precise
-      env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
+      env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest" PHPUNIT=true'
+    - name: phpstan
+      php: 7.1
+      env: 'PHPSTAN=true'
+      script: ./vendor/bin/phpstan analyse -l 3 src
+      after_script: echo "Done!"
   allow_failures:
     - php: master
 
@@ -21,11 +28,12 @@ sudo: false
 
 before_script:
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
+  - if [[ $PHPSTAN ]]; then composer require --dev phpstan/phpstan-shim --no-interaction --prefer-dist; fi
 
 script:
-  - vendor/bin/phpcs --standard=psr2 src/
-  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+  - if [[ $PHPCS ]]; then vendor/bin/phpcs --standard=psr2 src/; fi
+  - if [[ $PHPSTAN ]]; then vendor/bin/phpstan analyse -l 3 src; fi
+  - if [[ $PHPUNIT ]]; then vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover; fi
 
 after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  - if [[ $PHPUNIT ]]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
