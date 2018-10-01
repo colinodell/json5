@@ -287,7 +287,7 @@ final class Json5Decoder
         }
 
         if ($sign === '-') {
-            $number = -$number;
+            $number = -1 * $number;
         }
 
         if (!is_numeric($number) || !is_finite($number)) {
