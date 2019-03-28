@@ -6,6 +6,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased][unreleased]
 
+## [2.1.0] - 2019-03-28
 ### Added
  - Added `.phpstorm.meta.php` for better code completion
  - Added several tiny micro-optimizations
@@ -50,7 +51,8 @@ This release contains massive performance improvements of 98% or more, especiall
 ### Added
  - Initial commit
 
-[unreleased]: https://github.com/colinodell/json5/compare/v2.0.0...HEAD
+[unreleased]: https://github.com/colinodell/json5/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/colinodell/json5/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/colinodell/json5/compare/v1.0.5...v2.0.0
 [1.0.5]: https://github.com/colinodell/json5/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/colinodell/json5/compare/v1.0.3...v1.0.4
