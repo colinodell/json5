@@ -197,6 +197,12 @@ class ParseTest extends TestCase
         }
     }
 
+    public function testFunctionAlias()
+    {
+        $json = json_encode(['hello' => 'world']);
+        $this->assertEquals(Json5Decoder::decode($json, true), json5_decode($json, true));
+    }
+
     private function getErrorSpec($file)
     {
         $errorSpec = str_replace('.txt', '.errorSpec', $file);
