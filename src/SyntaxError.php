@@ -32,7 +32,7 @@ final class SyntaxError extends \JsonException
      */
     public function __construct($message, $linenumber, $columnNumber, $previous = null)
     {
-        $message = sprintf('%s at line %d column %d of the JSON5 data', $message, $linenumber, $columnNumber);
+        $message = \sprintf('%s at line %d column %d of the JSON5 data', $message, $linenumber, $columnNumber);
 
         parent::__construct($message, 0, $previous);
 

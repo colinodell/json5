@@ -51,7 +51,7 @@ final class Json5Decoder
         $this->maxDepth = $depth;
         $this->castBigIntToString = $castBigIntToString;
 
-        $this->length = strlen($json);
+        $this->length = \strlen($json);
         $this->currentByte = $this->getByte(0);
     }
 
@@ -73,15 +73,15 @@ final class Json5Decoder
         // Try parsing with json_decode first, since that's much faster
         // We only attempt this on PHP 7+ because 5.x doesn't parse some edge cases correctly
         if (PHP_VERSION_ID >= 70000) {
-            $result = json_decode($source, $associative, $depth, $options);
-            if (json_last_error() === JSON_ERROR_NONE) {
+            $result = \json_decode($source, $associative, $depth, $options);
+            if (\json_last_error() === \JSON_ERROR_NONE) {
                 return $result;
             }
         }
 
         // Fall back to JSON5 if that fails
-        $associative = $associative === true || ($associative === null && $options & JSON_OBJECT_AS_ARRAY);
-        $castBigIntToString = $options & JSON_BIGINT_AS_STRING;
+        $associative = $associative === true || ($associative === null && $options & \JSON_OBJECT_AS_ARRAY);
+        $castBigIntToString = $options & \JSON_BIGINT_AS_STRING;
 
         $decoder = new self((string)$source, $associative, $depth, $castBigIntToString);
 
@@ -117,7 +117,7 @@ final class Json5Decoder
             return null;
         }
 
-        return mb_substr(substr($this->json, $this->at, 4), 0, 1);
+        return \mb_substr(\substr($this->json, $this->at, 4), 0, 1);
     }
 
     /**
@@ -149,7 +149,7 @@ final class Json5Decoder
     private function nextOrFail($c)
     {
         if ($c !== $this->currentByte) {
-            $this->throwSyntaxError(sprintf(
+            $this->throwSyntaxError(\sprintf(
                 'Expected %s instead of %s',
                 self::renderChar($c),
                 self::renderChar($this->currentChar())
@@ -181,17 +181,17 @@ final class Json5Decoder
      */
     private function match($regex)
     {
-        $subject = substr($this->json, $this->at);
+        $subject = \substr($this->json, $this->at);
         // Only match on the current line
-        if ($pos = strpos($subject, "\n")) {
-            $subject = substr($subject, 0, $pos);
+        if ($pos = \strpos($subject, "\n")) {
+            $subject = \substr($subject, 0, $pos);
         }
 
-        if (!preg_match($regex, $subject, $matches, PREG_OFFSET_CAPTURE)) {
+        if (!\preg_match($regex, $subject, $matches, PREG_OFFSET_CAPTURE)) {
             return null;
         }
 
-        $this->at += $matches[0][1] + strlen($matches[0][0]);
+        $this->at += $matches[0][1] + \strlen($matches[0][0]);
         $this->currentByte = $this->getByte($this->at);
 
         return $matches[0][0];
@@ -219,8 +219,8 @@ final class Json5Decoder
         }
 
         // Un-escape escaped Unicode chars
-        $unescaped = preg_replace_callback('/(?:\\\\u[0-9A-Fa-f]{4})+/', function ($m) {
-            return json_decode('"'.$m[0].'"');
+        $unescaped = \preg_replace_callback('/(?:\\\\u[0-9A-Fa-f]{4})+/', function ($m) {
+            return \json_decode('"'.$m[0].'"');
         }, $match);
 
         return $unescaped;
@@ -260,7 +260,7 @@ final class Json5Decoder
                 $string .= $this->currentByte;
                 $this->next();
                 $base = 16;
-            } elseif (is_numeric($this->currentByte)) {
+            } elseif (\is_numeric($this->currentByte)) {
                 $this->throwSyntaxError('Octal literal');
             }
         }
@@ -268,7 +268,7 @@ final class Json5Decoder
         switch ($base) {
             case 10:
                 // @codingStandardsIgnoreStart
-                if ((is_numeric($this->currentByte) || $this->currentByte === '.') && ($match = $this->match('/^\d*\.?\d*/')) !== null) {
+                if ((\is_numeric($this->currentByte) || $this->currentByte === '.') && ($match = $this->match('/^\d*\.?\d*/')) !== null) {
                     $string .= $match;
                 }
                 if (($this->currentByte === 'E' || $this->currentByte === 'e') && ($match = $this->match('/^[Ee][-+]?\d*/')) !== null) {
@@ -280,7 +280,7 @@ final class Json5Decoder
             case 16:
                 if (($match = $this->match('/^[A-Fa-f0-9]+/')) !== null) {
                     $string .= $match;
-                    $number = hexdec($string);
+                    $number = \hexdec($string);
                     break;
                 }
                 $this->throwSyntaxError('Bad hex number');
@@ -290,7 +290,7 @@ final class Json5Decoder
             $number = -1 * $number;
         }
 
-        if (!is_numeric($number) || !is_finite($number)) {
+        if (!\is_numeric($number) || !\is_finite($number)) {
             $this->throwSyntaxError('Bad number');
         }
 
@@ -317,7 +317,7 @@ final class Json5Decoder
 
             if ($this->currentByte === '\\') {
                 if ($this->peek() === 'u' && $unicodeEscaped = $this->match('/^(?:\\\\u[A-Fa-f0-9]{4})+/')) {
-                    $string .= json_decode('"'.$unicodeEscaped.'"');
+                    $string .= \json_decode('"'.$unicodeEscaped.'"');
                     continue;
                 }
 
@@ -417,9 +417,9 @@ final class Json5Decoder
         while ($this->currentByte !== null) {
             if ($this->currentByte === '/') {
                 $this->comment();
-            } elseif (preg_match('/^[ \t\r\n\v\f\xA0]/', $this->currentByte) === 1) {
+            } elseif (\preg_match('/^[ \t\r\n\v\f\xA0]/', $this->currentByte) === 1) {
                 $this->next();
-            } elseif (ord($this->currentByte) === 0xC2 && ord($this->peek()) === 0xA0) {
+            } elseif (\ord($this->currentByte) === 0xC2 && \ord($this->peek()) === 0xA0) {
                 // Non-breaking space in UTF-8
                 $this->next();
                 $this->next();
@@ -585,15 +585,15 @@ final class Json5Decoder
             case '.':
                 return $this->number();
             default:
-                return is_numeric($this->currentByte) ? $this->number() : $this->word();
+                return \is_numeric($this->currentByte) ? $this->number() : $this->word();
         }
     }
 
     private function throwSyntaxError($message)
     {
         // Calculate the column number
-        $str = substr($this->json, $this->currentLineStartsAt, $this->at - $this->currentLineStartsAt);
-        $column = mb_strlen($str) + 1;
+        $str = \substr($this->json, $this->currentLineStartsAt, $this->at - $this->currentLineStartsAt);
+        $column = \mb_strlen($str) + 1;
 
         throw new SyntaxError($message, $this->lineNumber, $column);
     }
@@ -617,7 +617,7 @@ final class Json5Decoder
             case '\\': return '\\';
             case '/':  return '/';
             case "\n": return '';
-            case 'b':  return chr(8);
+            case 'b':  return \chr(8);
             case 'f':  return "\f";
             case 'n':  return "\n";
             case 'r':  return "\r";
