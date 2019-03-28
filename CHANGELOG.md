@@ -10,6 +10,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
  - Added `.phpstorm.meta.php` for better code completion
  - Added several tiny micro-optimizations
 
+### Removed
+ - Removed support for PHP 5.4 and 5.5
+
 ## [2.0.0] - 2018-09-20
 ### Added
  - Added a polyfill for class `\JsonException` (added in PHP 7.3)
