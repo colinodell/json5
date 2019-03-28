@@ -7,6 +7,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ## [Unreleased][unreleased]
 
 ### Added
+ - Added `.phpstorm.meta.php` for better code completion
  - Added several tiny micro-optimizations
 
 ## [2.0.0] - 2018-09-20
