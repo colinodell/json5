@@ -130,6 +130,10 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT
 
 If you discover any security related issues, please email colinodell@gmail.com instead of using the issue tracker.
 
+## Support
+
+In addition to standard support, [consider a Tidelift Subscription for professional support and get alerted when new releases or security issues come out](https://tidelift.com/subscription/pkg/packagist-colinodell-json5?utm_source=packagist-colinodell-json5&utm_medium=referral&utm_campaign=readme).
+
 ## Credits
 
 - [Colin O'Dell][link-author]
