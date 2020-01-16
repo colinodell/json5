@@ -28,7 +28,7 @@ sudo: false
 
 before_script:
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
-  - if [[ $PHPSTAN ]]; then composer require --dev phpstan/phpstan-shim --no-interaction --prefer-dist; fi
+  - if [[ $PHPSTAN ]]; then composer require --dev phpstan/phpstan --no-interaction --prefer-dist; fi
 
 script:
   - if [[ $PHPCS ]]; then vendor/bin/phpcs --standard=psr2 src/; fi
