@@ -25,9 +25,14 @@
     },
     "require-dev": {
         "mikehaertl/php-shellcommand": "^1.2.5",
+        "phpstan/phpstan": "^0.12.58",
+        "scrutinizer/ocular": "^1.6",
         "squizlabs/php_codesniffer": "^2.3",
         "symfony/finder": "^4.4|^5.2",
         "symfony/phpunit-bridge": "^5.1"
+    },
+    "conflict": {
+        "scrutinizer/ocular": "1.7.*"
     },
     "autoload": {
         "psr-4": {
