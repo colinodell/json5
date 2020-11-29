@@ -28,7 +28,7 @@ class BinTest extends TestCase
         $this->assertEmpty($cmd->getOutput());
 
         if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
-            $this->assertContains('Usage:', $cmd->getError());
+            $this->assertStringContainsString('Usage:', $cmd->getError());
         }
     }
 
@@ -42,7 +42,7 @@ class BinTest extends TestCase
         $cmd->execute();
 
         $this->assertEquals(0, $cmd->getExitCode());
-        $this->assertContains('Usage:', $cmd->getOutput());
+        $this->assertStringContainsString('Usage:', $cmd->getOutput());
     }
 
     /**
@@ -55,7 +55,7 @@ class BinTest extends TestCase
         $cmd->execute();
 
         $this->assertEquals(0, $cmd->getExitCode());
-        $this->assertContains('Usage:', $cmd->getOutput());
+        $this->assertStringContainsString('Usage:', $cmd->getOutput());
     }
 
     /**

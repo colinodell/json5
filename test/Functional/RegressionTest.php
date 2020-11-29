@@ -11,6 +11,7 @@
 
 namespace ColinODell\Json5\Test\Functional;
 
+use ColinODell\Json5\SyntaxError;
 use PHPUnit\Framework\TestCase;
 
 class RegressionTest extends TestCase
@@ -22,20 +23,18 @@ class RegressionTest extends TestCase
         $this->assertSame(array(0), json5_decode($json));
     }
 
-    /**
-     * @expectedException \ColinODell\Json5\SyntaxError
-     */
     public function testOpenCurlyBraceOnly()
     {
+        $this->expectException(SyntaxError::class);
+
         json5_decode('{');
         $this->fail('Should have thrown a syntax error');
     }
 
-    /**
-     * @expectedException \ColinODell\Json5\SyntaxError
-     */
     public function testOpenSquareBraceOnly()
     {
+        $this->expectException(SyntaxError::class);
+
         json5_decode('[');
         $this->fail('Should have thrown a syntax error');
     }

@@ -33,7 +33,7 @@ before_script:
 script:
   - if [[ $PHPCS ]]; then vendor/bin/phpcs --standard=psr2 src/; fi
   - if [[ $PHPSTAN ]]; then vendor/bin/phpstan analyse -l 3 src; fi
-  - if [[ $PHPUNIT ]]; then vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover; fi
+  - if [[ $PHPUNIT ]]; then vendor/bin/simple-phpunit --coverage-text --coverage-clover=coverage.clover; fi
 
 after_script:
   - if [[ $PHPUNIT ]]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi

@@ -12,25 +12,24 @@
 namespace ColinODell\Json5\Test\Functional;
 
 use ColinODell\Json5\Json5Decoder;
+use ColinODell\Json5\SyntaxError;
 use PHPUnit\Framework\TestCase;
 
 class MaximumDepthTest extends TestCase
 {
-    /**
-     * @expectedException \ColinODell\Json5\SyntaxError
-     * @expectedExceptionMessage Maximum stack depth exceeded
-     */
     public function testMaximumDepthWithArray()
     {
+        $this->expectException(SyntaxError::class);
+        $this->expectExceptionMessage('Maximum stack depth exceeded');
+
         Json5Decoder::decode('[[1]]', false, 2);
     }
 
-    /**
-     * @expectedException \ColinODell\Json5\SyntaxError
-     * @expectedExceptionMessage Maximum stack depth exceeded
-     */
     public function testMaximumDepthWithObject()
     {
+        $this->expectException(SyntaxError::class);
+        $this->expectExceptionMessage('Maximum stack depth exceeded');
+
         Json5Decoder::decode('{"foo": {"bar": "baz"}}', false, 2);
     }
 

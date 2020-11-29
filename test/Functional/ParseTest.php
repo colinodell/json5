@@ -89,10 +89,11 @@ class ParseTest extends TestCase
      * @param string $json
      *
      * @dataProvider dataForTestValidES5DisallowedByJson5
-     * @expectedException \ColinODell\Json5\SyntaxError
      */
     public function testValidES5DisallowedByJson5($json)
     {
+        $this->expectException(SyntaxError::class);
+
         Json5Decoder::decode($json);
     }
 
@@ -160,19 +161,17 @@ class ParseTest extends TestCase
         $this->assertTrue(is_nan(Json5Decoder::decode('+NaN')));
     }
 
-    /**
-     * @expectedException \ColinODell\Json5\SyntaxError
-     */
     public function testBadNumberStartingWithN()
     {
+        $this->expectException(SyntaxError::class);
+
         Json5Decoder::decode('NotANumber');
     }
 
-    /**
-     * @expectedException \ColinODell\Json5\SyntaxError
-     */
     public function testBadNumberStartingWithI()
     {
+        $this->expectException(SyntaxError::class);
+
         Json5Decoder::decode('+Indigo');
     }
 

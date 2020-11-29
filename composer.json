@@ -25,9 +25,9 @@
     },
     "require-dev": {
         "mikehaertl/php-shellcommand": "^1.2.5",
-        "phpunit/phpunit": "^4.8.36|^7.3|^9.0",
         "squizlabs/php_codesniffer": "^2.3",
-        "symfony/finder": "^2.8|^3.4|^4.1"
+        "symfony/finder": "^2.8|^3.4|^4.1",
+        "symfony/phpunit-bridge": "^5.1"
     },
     "autoload": {
         "psr-4": {
