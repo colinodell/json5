@@ -202,6 +202,22 @@ class ParseTest extends TestCase
         $this->assertEquals(Json5Decoder::decode($json, true), json5_decode($json, true));
     }
 
+    /**
+     * BUG: parse json5 codes always thorw JsonException on set JSON_THROW_ON_ERROR
+     * more see https://github.com/colinodell/json5/issues/15
+     *
+     * @return void
+     */
+    public function testIssues15_parseException()
+    {
+        $ret = Json5Decoder::decode('{
+            "name": "tom", // has comments
+        }');
+
+        $this->assertNotEmpty($ret);
+        $this->assertEquals(['name' => 'tom'], $ret);
+    }
+
     private function getErrorSpec($file)
     {
         $errorSpec = str_replace('.txt', '.errorSpec', $file);
