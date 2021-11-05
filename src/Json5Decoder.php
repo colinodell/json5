@@ -74,9 +74,9 @@ final class Json5Decoder
         // We only attempt this on PHP 7+ because 5.x doesn't parse some edge cases correctly
         if (PHP_VERSION_ID >= 70000) {
             try {
-                $result = \json_decode($source, $associative, $depth, $options | \JSON_THROW_ON_ERROR);
+                return \json_decode($source, $associative, $depth, $options | \JSON_THROW_ON_ERROR);
             } catch (\Throwable $e) {
-                // ignore exception, continue parse.
+                // ignore exception, continue parsing as JSON5
             }
         }
 

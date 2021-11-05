@@ -203,19 +203,15 @@ class ParseTest extends TestCase
     }
 
     /**
-     * BUG: parse json5 codes always thorw JsonException on set JSON_THROW_ON_ERROR
-     * more see https://github.com/colinodell/json5/issues/15
+     * Regression: Parsing JSON5 always throws JsonException when JSON_THROW_ON_ERROR is set by the caller
      *
-     * @return void
+     * @see https://github.com/colinodell/json5/issues/15
      */
-    public function testIssues15_parseException()
+    public function testExceptionShouldNotBeThrownOnValidJSON5()
     {
-        $ret = Json5Decoder::decode('{
-            "name": "tom", // has comments
-        }');
+        $ret = Json5Decoder::decode('"foo" // simple string with a comment', false, 512, JSON_THROW_ON_ERROR);
 
-        $this->assertNotEmpty($ret);
-        $this->assertEquals(['name' => 'tom'], $ret);
+        $this->assertEquals('foo', $ret);
     }
 
     private function getErrorSpec($file)
