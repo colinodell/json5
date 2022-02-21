@@ -50,17 +50,18 @@ class ParseTest extends TestCase
 
     /**
      * @param string      $json
+     * @param int         $flags
      * @param string      $expected
      * @param string|null $expectedAssoc
      *
      * @dataProvider dataForTestJson5Parsing
      */
-    public function testJson5Parsing($json, $expected, $expectedAssoc = null)
+    public function testJson5Parsing($json, $flags, $expected, $expectedAssoc = null)
     {
-        $this->assertSame($expected, serialize(Json5Decoder::decode($json)));
+        $this->assertSame($expected, serialize(Json5Decoder::decode($json, false, 512, $flags)));
 
         if ($expectedAssoc !== null) {
-            $this->assertSame($expectedAssoc, serialize(Json5Decoder::decode($json, true)));
+            $this->assertSame($expectedAssoc, serialize(Json5Decoder::decode($json, true, 512, $flags)));
         }
     }
 
@@ -75,8 +76,16 @@ class ParseTest extends TestCase
         $tests = array();
         foreach ($finder as $file) {
             $data = explode('////////// EXPECTED OUTPUT: //////////', file_get_contents($file));
+            $firstLine = preg_split('#\r?\n#', $data[0], 0)[0];
+            if (str_starts_with($firstLine, '//@flags:')) {
+                $flags = eval('return ' . trim(substr($firstLine, strlen('//@flags:'))) . ';');
+            } else {
+                $flags = 0;
+            }
+
             $tests[] = array(
                 $data[0],
+                $flags,
                 trim($data[1]),
                 isset($data[2]) ? trim($data[2]) : null,
             );
