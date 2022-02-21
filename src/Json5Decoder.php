@@ -291,19 +291,22 @@ final class Json5Decoder
         }
 
         if ($sign === '-') {
-            $number = -1 * $number;
+            $number = '-' . $number;
         }
 
         if (!\is_numeric($number) || !\is_finite($number)) {
             $this->throwSyntaxError('Bad number');
         }
 
-        if ($this->castBigIntToString) {
+        // Adding 0 will automatically cast this to an int or float
+        $asIntOrFloat = $number + 0;
+
+        $isIntLike = preg_match('/^-?\d+$/', $number) === 1;
+        if ($this->castBigIntToString && $isIntLike && is_float($asIntOrFloat)) {
             return $number;
         }
 
-        // Adding 0 will automatically cast this to an int or float
-        return $number + 0;
+        return $asIntOrFloat;
     }
 
     private function string()
