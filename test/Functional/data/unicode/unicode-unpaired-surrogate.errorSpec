@@ -1,0 +1,5 @@
+{
+    "lineNumber": 1,
+    "columnNumber": 24,
+    "message": "Single unpaired UTF-16 surrogate in unicode escape",
+}
