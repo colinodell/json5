@@ -83,7 +83,7 @@ class ParseTest extends TestCase
                 $flags = 0;
             }
 
-            $tests[] = array(
+            $tests[$file->getFilename()] = array(
                 $data[0],
                 $flags,
                 trim($data[1]),
