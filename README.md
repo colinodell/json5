@@ -156,7 +156,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 [link-packagist]: https://packagist.org/packages/colinodell/json5
 [link-build-status]: https://github.com/colinodell/json5/actions?query=workflow%3ATests+branch%3Alatest
-[link-scrutinizer]: https://scrutinizer-ci.com/g/colinodell/json5/code-structure/master/code-coverage
+[link-scrutinizer]: https://scrutinizer-ci.com/g/colinodell/json5/code-structure/main/code-coverage
 [link-code-quality]: https://scrutinizer-ci.com/g/colinodell/json5
 [link-downloads]: https://packagist.org/packages/colinodell/json5
 [link-sensio]: https://insight.sensiolabs.com/projects/45decdff-5544-43c4-9547-61c9f514b121
