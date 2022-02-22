@@ -8,6 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
  - Fixed "small" integers always being cast to strings when `JSON_BIGINT_AS_STRING` is set (#17)
+ - Fixed exceptions not being thrown when invalid UTF-16 escape sequences are encountered in strings
 
 ## [2.2.1] - 2021-11-06
 ### Fixed
