@@ -325,7 +325,11 @@ final class Json5Decoder
             if ($this->currentByte === '\\') {
                 if ($this->peek() === 'u' && $unicodeEscaped = $this->match('/^(?:\\\\u[A-Fa-f0-9]{4})+/')) {
                     try {
-                        $string .= \json_decode('"' . $unicodeEscaped . '"', false, 1, JSON_THROW_ON_ERROR);
+                        $unicodeUnescaped = \json_decode('"' . $unicodeEscaped . '"', false, 1, JSON_THROW_ON_ERROR);
+                        if ($unicodeUnescaped === null && ($err = json_last_error_msg())) {
+                            throw new \JsonException($err);
+                        }
+                        $string .= $unicodeUnescaped;
                     } catch (\JsonException $e) {
                         $this->throwSyntaxError($e->getMessage());
                     }
