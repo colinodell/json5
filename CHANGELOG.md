@@ -6,6 +6,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased][unreleased]
 
+### Added
+ - Added parameter and return types matching the existing docblocks
+
 ### Fixed
  - Fixed missing `@throws` docblocks needed for PhpStorm to recognize exceptions (#21)
 

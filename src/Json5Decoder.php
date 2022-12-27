@@ -38,13 +38,8 @@ final class Json5Decoder
 
     /**
      * Private constructor.
-     *
-     * @param string $json
-     * @param bool   $associative
-     * @param int    $depth
-     * @param bool   $castBigIntToString
      */
-    private function __construct($json, $associative = false, $depth = 512, $castBigIntToString = false)
+    private function __construct(string $json, bool $associative = false, int $depth = 512, bool $castBigIntToString = false)
     {
         $this->json = $json;
         $this->associative = $associative;
@@ -70,7 +65,7 @@ final class Json5Decoder
      *
      * @return mixed
      */
-    public static function decode($source, $associative = false, $depth = 512, $options = 0)
+    public static function decode(string $source, ?bool $associative = false, int $depth = 512, int $options = 0)
     {
         // Try parsing with json_decode first, since that's much faster
         // We only attempt this on PHP 7+ because 5.x doesn't parse some edge cases correctly
@@ -89,7 +84,7 @@ final class Json5Decoder
         $associative = $associative === true || ($associative === null && $options & \JSON_OBJECT_AS_ARRAY);
         $castBigIntToString = $options & \JSON_BIGINT_AS_STRING;
 
-        $decoder = new self((string)$source, $associative, $depth, $castBigIntToString);
+        $decoder = new self($source, $associative, $depth, $castBigIntToString);
 
         $result = $decoder->value();
         $decoder->white();
