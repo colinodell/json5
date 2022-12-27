@@ -66,6 +66,8 @@ final class Json5Decoder
      * @param int    $depth       User specified recursion depth.
      * @param int    $options     Bitmask of JSON decode options.
      *
+     * @throws SyntaxError if the JSON encoded string could not be parsed.
+     *
      * @return mixed
      */
     public static function decode($source, $associative = false, $depth = 512, $options = 0)
