@@ -1,4 +1,7 @@
 .idea
+.phpunit.result.cache
 build
 composer.lock
+phpcs.xml
+phpunit.xml
 vendor

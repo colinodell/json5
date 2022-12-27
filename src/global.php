@@ -17,7 +17,7 @@ if (!function_exists('json5_decode')) {
      *
      * @return mixed
      */
-    function json5_decode($source, $associative = false, $depth = 512, $options = 0)
+    function json5_decode(string $source, ?bool $associative = false, int $depth = 512, int $options = 0)
     {
         return \ColinODell\Json5\Json5Decoder::decode($source, $associative, $depth, $options);
     }
