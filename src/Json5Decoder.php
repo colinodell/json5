@@ -100,12 +100,7 @@ final class Json5Decoder
         return $result;
     }
 
-    /**
-     * @param int $at
-     *
-     * @return null
-     */
-    private function getByte($at)
+    private function getByte(int $at): ?string
     {
         if ($at >= $this->length) {
             return null;
@@ -114,10 +109,7 @@ final class Json5Decoder
         return $this->json[$at];
     }
 
-    /**
-     * @return string|null
-     */
-    private function currentChar()
+    private function currentChar(): ?string
     {
         if ($this->at >= $this->length) {
             return null;
@@ -128,10 +120,8 @@ final class Json5Decoder
 
     /**
      * Parse the next character.
-     *
-     * @return null|string
      */
-    private function next()
+    private function next(): ?string
     {
         // Get the next character. When there are no more characters,
         // return the empty string.
@@ -147,12 +137,8 @@ final class Json5Decoder
 
     /**
      * Parse the next character if it matches $c or fail.
-     *
-     * @param string $c
-     *
-     * @return string|null
      */
-    private function nextOrFail($c)
+    private function nextOrFail(string $c): ?string
     {
         if ($c !== $this->currentByte) {
             $this->throwSyntaxError(\sprintf(
@@ -168,10 +154,8 @@ final class Json5Decoder
     /**
      * Get the next character without consuming it or
      * assigning it to the ch variable.
-     *
-     * @return mixed
      */
-    private function peek()
+    private function peek(): ?string
     {
         return $this->getByte($this->at + 1);
     }
@@ -180,12 +164,8 @@ final class Json5Decoder
      * Attempt to match a regular expression at the current position on the current line.
      *
      * This function will not match across multiple lines.
-     *
-     * @param string $regex
-     *
-     * @return string|null
      */
-    private function match($regex)
+    private function match(string $regex): ?string
     {
         $subject = \substr($this->json, $this->at);
         // Only match on the current line
@@ -213,7 +193,7 @@ final class Json5Decoder
      * - https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Core_Language_Features#Variables
      * - http://docstore.mik.ua/orelly/webprog/jscript/ch02_07.htm
      */
-    private function identifier()
+    private function identifier(): string
     {
         // @codingStandardsIgnoreStart
         // Be careful when editing this regex, there are a couple Unicode characters in between here -------------vv
@@ -232,6 +212,9 @@ final class Json5Decoder
         return $unescaped;
     }
 
+    /**
+     * @return int|float|string
+     */
     private function number()
     {
         $number = null;
@@ -311,7 +294,7 @@ final class Json5Decoder
         return $asIntOrFloat;
     }
 
-    private function string()
+    private function string(): string
     {
         $string = '';
 
@@ -369,7 +352,7 @@ final class Json5Decoder
      * The current character should be the second / character in the // pair that begins this inline comment.
      * To finish the inline comment, we look for a newline or the end of the text.
      */
-    private function inlineComment()
+    private function inlineComment(): void
     {
         do {
             $this->next();
@@ -388,7 +371,7 @@ final class Json5Decoder
      * To finish the block comment, we look for an ending *​/ pair of characters,
      * but we also watch for the end of text before the comment is terminated.
      */
-    private function blockComment()
+    private function blockComment(): void
     {
         do {
             $this->next();
@@ -408,7 +391,7 @@ final class Json5Decoder
     /**
      * Skip a comment, whether inline or block-level, assuming this is one.
      */
-    private function comment()
+    private function comment(): void
     {
         // Comments always begin with a / character.
         $this->nextOrFail('/');
@@ -429,7 +412,7 @@ final class Json5Decoder
      * This works since regular expressions are not valid JSON(5), but this will
      * break if there are other valid values that begin with a / character!
      */
-    private function white()
+    private function white(): void
     {
         while ($this->currentByte !== null) {
             if ($this->currentByte === '/') {
@@ -448,6 +431,8 @@ final class Json5Decoder
 
     /**
      * Matches true, false, null, etc
+     *
+     * @return bool|null|float
      */
     private function word()
     {
@@ -491,7 +476,7 @@ final class Json5Decoder
         $this->throwSyntaxError('Unexpected ' . self::renderChar($this->currentChar()));
     }
 
-    private function arr()
+    private function arr(): array
     {
         $arr = [];
 
@@ -532,6 +517,8 @@ final class Json5Decoder
 
     /**
      * Parse an object value
+     *
+     * @return array|object
      */
     private function obj()
     {
@@ -585,6 +572,8 @@ final class Json5Decoder
      *
      * It could be an object, an array, a string, a number,
      * or a word.
+     *
+     * @return mixed
      */
     private function value()
     {
@@ -606,7 +595,12 @@ final class Json5Decoder
         }
     }
 
-    private function throwSyntaxError($message)
+    /**
+     * @throws SyntaxError
+     *
+     * @phpstan-return never
+     */
+    private function throwSyntaxError(string $message): void
     {
         // Calculate the column number
         $str = \substr($this->json, $this->currentLineStartsAt, $this->at - $this->currentLineStartsAt);
@@ -615,17 +609,12 @@ final class Json5Decoder
         throw new SyntaxError($message, $this->lineNumber, $column);
     }
 
-    private static function renderChar($chr)
+    private static function renderChar(?string $chr): string
     {
         return $chr === null ? 'EOF' : "'" . $chr . "'";
     }
 
-    /**
-     * @param string $ch
-     *
-     * @return string|null
-     */
-    private static function getEscapee($ch)
+    private static function getEscapee(string $ch): ?string
     {
         switch ($ch) {
             // @codingStandardsIgnoreStart
