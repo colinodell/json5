@@ -6,6 +6,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased][unreleased]
 
+### Fixed
+ - Fixed missing `@throws` docblocks needed for PhpStorm to recognize exceptions (#21)
+
 ## [2.2.2] - 2022-02-21
 
 ### Fixed
