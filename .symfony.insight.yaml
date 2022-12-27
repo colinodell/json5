@@ -1,0 +1,7 @@
+# SymfonyInsight seems to cache composer.lock against our wishes
+pre_composer_script: rm -rf composer.lock
+
+rules:
+    # We do want json5_decode() exposed as a global function
+    php.use_global_variable_or_function:
+        enabled: false
