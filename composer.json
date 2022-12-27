@@ -47,9 +47,15 @@
     },
     "bin": ["bin/json5"],
     "scripts": {
-        "test": "simple-phpunit",
-        "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src test",
-        "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src test"
+        "test": [
+            "@phpunit",
+            "@check-style",
+            "@phpstan"
+        ],
+        "phpunit": "simple-phpunit",
+        "phpstan": "phpstan analyse",
+        "check-style": "phpcs",
+        "fix-style": "phpcbf"
     },
     "extra": {
         "branch-alias": {
