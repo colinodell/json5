@@ -6,6 +6,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased][unreleased]
 
+## [2.3.0] - 2022-12-27
+
 ### Added
  - Added parameter and return types matching the existing docblocks
 
@@ -74,7 +76,8 @@ This release contains massive performance improvements of 98% or more, especiall
 ### Added
  - Initial commit
 
-[unreleased]: https://github.com/colinodell/json5/compare/v2.2.2...HEAD
+[unreleased]: https://github.com/colinodell/json5/compare/v2.3.0...HEAD
+[2.3.0]: https://github.com/colinodell/json5/compare/v2.2.2...v2.3.0
 [2.2.2]: https://github.com/colinodell/json5/compare/v2.2.1...v2.2.2
 [2.2.1]: https://github.com/colinodell/json5/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/colinodell/json5/compare/v2.1.0...v2.2.0
