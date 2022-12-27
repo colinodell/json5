@@ -26,11 +26,11 @@ final class Json5Decoder
 
     private $lineNumber = 1;
 
-    private $associative = false;
+    private $associative;
 
-    private $maxDepth = 512;
+    private $maxDepth;
 
-    private $castBigIntToString = false;
+    private $castBigIntToString;
 
     private $depth = 1;
 
