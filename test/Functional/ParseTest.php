@@ -156,7 +156,7 @@ class ParseTest extends TestCase
 
         $tests = array();
         foreach ($finder as $file) {
-            $tests[] = array(
+            $tests[$file->getFilename()] = array(
                 file_get_contents($file),
                 $this->getErrorSpec($file),
             );
