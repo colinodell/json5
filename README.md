@@ -34,11 +34,8 @@ multi-line string',
     delta: +10,
     to: Infinity,   // and beyond!
 
-    finally: 'a trailing comma',
-    oh: [
-        "we shouldn't forget",
-        'arrays can have',
-        'trailing commas too',
+    finally: [
+        'some trailing commas',
     ],
 }
 ```
