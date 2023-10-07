@@ -624,7 +624,7 @@ final class Json5Decoder
             case 'r':  return "\r";
             case 't':  return "\t";
             default:   return null;
-            // @codingStandardsIgnoreEnd
+                // @codingStandardsIgnoreEnd
         }
     }
 }
