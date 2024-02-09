@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased][unreleased]
 
+## [3.0.0] - 2024-02-09
+
+You should not notice any breaking changes in this release unless you were using named parameters, or ignoring argument types defined in docblocks.
+
 ### Changed
  - Renamed function parameters to match `json_decode()`'s signature
    - `$source` is now `$json`
@@ -89,7 +93,8 @@ This release contains massive performance improvements of 98% or more, especiall
 ### Added
  - Initial commit
 
-[unreleased]: https://github.com/colinodell/json5/compare/v2.3.0...HEAD
+[unreleased]: https://github.com/colinodell/json5/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/colinodell/json5/compare/v2.3.0...v3.0.0
 [2.3.0]: https://github.com/colinodell/json5/compare/v2.2.2...v2.3.0
 [2.2.2]: https://github.com/colinodell/json5/compare/v2.2.1...v2.2.2
 [2.2.1]: https://github.com/colinodell/json5/compare/v2.2.0...v2.2.1
