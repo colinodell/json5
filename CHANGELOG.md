@@ -11,6 +11,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
    - `$source` is now `$json`
    - `$options` is now `$flags`
 
+### Removed
+ - Removed support for PHP 7.x (8.0+ is now required)
+
 ## [2.3.0] - 2022-12-27
 
 ### Added

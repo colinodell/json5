@@ -68,7 +68,6 @@ final class Json5Decoder
     public static function decode(string $json, ?bool $associative = false, int $depth = 512, int $flags = 0)
     {
         // Try parsing with json_decode first, since that's much faster
-        // We only attempt this on PHP 7+ because 5.x doesn't parse some edge cases correctly
         try {
             $result = \json_decode($json, $associative, $depth, $flags);
             if (\json_last_error() === \JSON_ERROR_NONE) {

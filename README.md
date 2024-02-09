@@ -1,7 +1,7 @@
 # JSON5 for PHP - JSON for Humans
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
-[![PHP 7.1+][ico-php]][link-packagist]
+[![PHP 8.0+][ico-php]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status][ico-build-status]][link-build-status]
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
@@ -69,8 +69,6 @@ To achieve the best possible performance, it'll try parsing with PHP's native fu
 
 This function will **always** throw a `SyntaxError` exception if parsing fails.  This is a subclass of the new `\JsonException` introduced in PHP 7.3.
 Providing or omitting the `JSON_THROW_ON_ERROR` option will have no effect on this behavior.
-
-For users on PHP 7.2 and below: a PHP 7.3 polyfill is included with this library so that you can safely reference `\JsonException` and `JSON_THROW_ON_ERROR` in your own code.
 
 ## Binary / Executable
 
