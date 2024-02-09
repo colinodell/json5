@@ -188,10 +188,7 @@ final class Json5Decoder
         return $unescaped;
     }
 
-    /**
-     * @return int|float|string
-     */
-    private function number()
+    private function number(): int|float|string
     {
         $number = null;
         $sign = '';
@@ -407,10 +404,8 @@ final class Json5Decoder
 
     /**
      * Matches true, false, null, etc
-     *
-     * @return bool|null|float
      */
-    private function word()
+    private function word(): bool|float|null
     {
         switch ($this->currentByte) {
             case 't':
@@ -493,10 +488,8 @@ final class Json5Decoder
 
     /**
      * Parse an object value
-     *
-     * @return array|object
      */
-    private function obj()
+    private function obj(): array|object
     {
         $object = $this->associative ? [] : new \stdClass;
 
@@ -548,27 +541,17 @@ final class Json5Decoder
      *
      * It could be an object, an array, a string, a number,
      * or a word.
-     *
-     * @return mixed
      */
-    private function value()
+    private function value(): mixed
     {
         $this->white();
-        switch ($this->currentByte) {
-            case '{':
-                return $this->obj();
-            case '[':
-                return $this->arr();
-            case '"':
-            case "'":
-                return $this->string();
-            case '-':
-            case '+':
-            case '.':
-                return $this->number();
-            default:
-                return \is_numeric($this->currentByte) ? $this->number() : $this->word();
-        }
+        return match ($this->currentByte) {
+            '{' => $this->obj(),
+            '[' => $this->arr(),
+            '"', "'" => $this->string(),
+            '-', '+', '.' => $this->number(),
+            default => \is_numeric($this->currentByte) ? $this->number() : $this->word(),
+        };
     }
 
     /**
@@ -592,20 +575,18 @@ final class Json5Decoder
 
     private static function getEscapee(string $ch): ?string
     {
-        switch ($ch) {
-            // @codingStandardsIgnoreStart
-            case "'":  return "'";
-            case '"':  return '"';
-            case '\\': return '\\';
-            case '/':  return '/';
-            case "\n": return '';
-            case 'b':  return \chr(8);
-            case 'f':  return "\f";
-            case 'n':  return "\n";
-            case 'r':  return "\r";
-            case 't':  return "\t";
-            default:   return null;
-                // @codingStandardsIgnoreEnd
-        }
+        return match ($ch) {
+            "'" => "'",
+            '"' => '"',
+            '\\' => '\\',
+            '/' => '/',
+            "\n" => '',
+            'b' => \chr(8),
+            'f' => "\f",
+            'n' => "\n",
+            'r' => "\r",
+            't' => "\t",
+            default => null,
+        };
     }
 }
