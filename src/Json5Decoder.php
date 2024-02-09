@@ -69,15 +69,13 @@ final class Json5Decoder
     {
         // Try parsing with json_decode first, since that's much faster
         // We only attempt this on PHP 7+ because 5.x doesn't parse some edge cases correctly
-        if (PHP_VERSION_ID >= 70000) {
-            try {
-                $result = \json_decode($json, $associative, $depth, $flags);
-                if (\json_last_error() === \JSON_ERROR_NONE) {
-                    return $result;
-                }
-            } catch (\Throwable $e) {
-                // ignore exception, continue parsing as JSON5
+        try {
+            $result = \json_decode($json, $associative, $depth, $flags);
+            if (\json_last_error() === \JSON_ERROR_NONE) {
+                return $result;
             }
+        } catch (\Throwable $e) {
+            // ignore exception, continue parsing as JSON5
         }
 
         // Fall back to JSON5 if that fails
