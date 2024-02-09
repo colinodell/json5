@@ -154,7 +154,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-scrutinizer]: https://scrutinizer-ci.com/g/colinodell/json5/code-structure/main/code-coverage
 [link-code-quality]: https://scrutinizer-ci.com/g/colinodell/json5
 [link-downloads]: https://packagist.org/packages/colinodell/json5
-[link-sensio]: https://insight.sensiolabs.com/projects/45decdff-5544-43c4-9547-61c9f514b121
+[link-sensio]: https://insight.symfony.com/projects/920abb3b-a7d0-431a-bb5a-9831d142690e
 [link-author]: https://github.com/colinodell
 [link-json5]: https://github.com/json5/json5
 [link-php-jsondecode]: http://php.net/manual/en/function.json-decode.php
