@@ -6,6 +6,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [Unreleased][unreleased]
 
+### Changed
+ - Renamed function parameters to match `json_decode()`'s signature
+   - `$source` is now `$json`
+   - `$options` is now `$flags`
+
 ## [2.3.0] - 2022-12-27
 
 ### Added

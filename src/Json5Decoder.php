@@ -56,22 +56,22 @@ final class Json5Decoder
      * The parameters exactly match PHP's json_decode() function - see
      * http://php.net/manual/en/function.json-decode.php for more information.
      *
-     * @param string $source      The JSON string being decoded.
+     * @param string $json        The JSON string being decoded.
      * @param bool   $associative When TRUE, returned objects will be converted into associative arrays.
      * @param int    $depth       User specified recursion depth.
-     * @param int    $options     Bitmask of JSON decode options.
+     * @param int    $flags       Bitmask of JSON decode options.
      *
      * @throws SyntaxError if the JSON encoded string could not be parsed.
      *
      * @return mixed
      */
-    public static function decode(string $source, ?bool $associative = false, int $depth = 512, int $options = 0)
+    public static function decode(string $json, ?bool $associative = false, int $depth = 512, int $flags = 0)
     {
         // Try parsing with json_decode first, since that's much faster
         // We only attempt this on PHP 7+ because 5.x doesn't parse some edge cases correctly
         if (PHP_VERSION_ID >= 70000) {
             try {
-                $result = \json_decode($source, $associative, $depth, $options);
+                $result = \json_decode($json, $associative, $depth, $flags);
                 if (\json_last_error() === \JSON_ERROR_NONE) {
                     return $result;
                 }
@@ -81,10 +81,10 @@ final class Json5Decoder
         }
 
         // Fall back to JSON5 if that fails
-        $associative = $associative === true || ($associative === null && $options & \JSON_OBJECT_AS_ARRAY);
-        $castBigIntToString = $options & \JSON_BIGINT_AS_STRING;
+        $associative = $associative === true || ($associative === null && $flags & \JSON_OBJECT_AS_ARRAY);
+        $castBigIntToString = $flags & \JSON_BIGINT_AS_STRING;
 
-        $decoder = new self($source, $associative, $depth, $castBigIntToString);
+        $decoder = new self($json, $associative, $depth, $castBigIntToString);
 
         $result = $decoder->value();
         $decoder->white();
