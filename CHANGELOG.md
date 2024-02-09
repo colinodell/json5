@@ -11,6 +11,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
    - `$source` is now `$json`
    - `$options` is now `$flags`
  - Added explicit `mixed` return type to match `json_decode()`
+ - Added proper types to all parameters and return values of `SyntaxError`
+ - Renamed two arguments in the `SyntaxError`'s constructor:
+   - `$linenumber` is now `$lineNumber`
+   - `$columnNumber` is now `$column`
 
 ### Removed
  - Removed support for PHP 7.x (8.0+ is now required)
