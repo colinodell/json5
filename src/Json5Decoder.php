@@ -16,36 +16,22 @@ namespace ColinODell\Json5;
 
 final class Json5Decoder
 {
-    private $json;
-
-    private $length;
-
-    private $at = 0;
-
-    private $currentByte;
-
-    private $lineNumber = 1;
-
-    private $associative;
-
-    private $maxDepth;
-
-    private $castBigIntToString;
-
-    private $depth = 1;
-
-    private $currentLineStartsAt = 0;
+    private int $length;
+    private int $at = 0;
+    private ?string $currentByte;
+    private int $lineNumber = 1;
+    private int $depth = 1;
+    private int $currentLineStartsAt = 0;
 
     /**
      * Private constructor.
      */
-    private function __construct(string $json, bool $associative = false, int $depth = 512, bool $castBigIntToString = false)
-    {
-        $this->json = $json;
-        $this->associative = $associative;
-        $this->maxDepth = $depth;
-        $this->castBigIntToString = $castBigIntToString;
-
+    private function __construct(
+        private string $json,
+        private bool $associative = false,
+        private int $maxDepth = 512,
+        private bool $castBigIntToString = false
+    ) {
         $this->length = \strlen($json);
         $this->currentByte = $this->getByte(0);
     }
@@ -62,10 +48,8 @@ final class Json5Decoder
      * @param int    $flags       Bitmask of JSON decode options.
      *
      * @throws SyntaxError if the JSON encoded string could not be parsed.
-     *
-     * @return mixed
      */
-    public static function decode(string $json, ?bool $associative = false, int $depth = 512, int $flags = 0)
+    public static function decode(string $json, ?bool $associative = false, int $depth = 512, int $flags = 0): mixed
     {
         // Try parsing with json_decode first, since that's much faster
         try {

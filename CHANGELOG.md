@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
  - Renamed function parameters to match `json_decode()`'s signature
    - `$source` is now `$json`
    - `$options` is now `$flags`
+ - Added explicit `mixed` return type to match `json_decode()`
 
 ### Removed
  - Removed support for PHP 7.x (8.0+ is now required)

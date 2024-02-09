@@ -14,10 +14,8 @@ if (!function_exists('json5_decode')) {
      * @param int    $flags       Bitmask of JSON decode options.
      *
      * @throws \ColinODell\Json5\SyntaxError if the JSON encoded string could not be parsed.
-     *
-     * @return mixed
      */
-    function json5_decode(string $json, ?bool $associative = false, int $depth = 512, int $flags = 0)
+    function json5_decode(string $json, ?bool $associative = false, int $depth = 512, int $flags = 0): mixed
     {
         return \ColinODell\Json5\Json5Decoder::decode($json, $associative, $depth, $flags);
     }
