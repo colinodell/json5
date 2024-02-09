@@ -97,7 +97,7 @@ final class Json5Decoder
     /**
      * Parse the next character.
      */
-    private function next(): ?string
+    private function next(): void
     {
         // Get the next character. When there are no more characters,
         // return the empty string.
@@ -108,13 +108,13 @@ final class Json5Decoder
 
         $this->at++;
 
-        return $this->currentByte = $this->getByte($this->at);
+        $this->currentByte = $this->getByte($this->at);
     }
 
     /**
      * Parse the next character if it matches $c or fail.
      */
-    private function nextOrFail(string $c): ?string
+    private function nextOrFail(string $c): void
     {
         if ($c !== $this->currentByte) {
             $this->throwSyntaxError(\sprintf(
@@ -124,7 +124,7 @@ final class Json5Decoder
             ));
         }
 
-        return $this->next();
+        $this->next();
     }
 
     /**
