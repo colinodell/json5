@@ -14,3 +14,6 @@
 /phpunit.xml.dist   export-ignore
 /test               export-ignore
 /docs               export-ignore
+.phpstorm.meta.php  export-ignore
+phpcs.xml.dist      export-ignore
+phpstan.neon.dist   export-ignore
