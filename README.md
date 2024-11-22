@@ -49,7 +49,7 @@ multi-line string',
 Via Composer
 
 ``` bash
-$ composer require colinodell/json5
+composer require colinodell/json5
 ```
 
 ## Usage
@@ -114,7 +114,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 ## Testing
 
 ``` bash
-$ composer test
+composer test
 ```
 
 ## Contributing
