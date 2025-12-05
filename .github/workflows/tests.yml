@@ -10,7 +10,7 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v6
 
             - uses: shivammathur/setup-php@v2
               with:
@@ -29,7 +29,7 @@ jobs:
         continue-on-error: ${{ !matrix.stable }}
         strategy:
             matrix:
-                php: ['8.0', '8.1', '8.2', '8.3','8.4']
+                php: ['8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
                 stable: [true]
                 coverage: [true]
                 composer-flags: ['']
@@ -40,7 +40,7 @@ jobs:
                       composer-flags: '--prefer-lowest'
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v6
               with:
                 fetch-depth: 0
 
@@ -69,7 +69,7 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v6
 
             - uses: shivammathur/setup-php@v2
               with:
