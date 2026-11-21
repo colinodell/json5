@@ -189,6 +189,51 @@ class ParseTest extends TestCase
         $this->assertSame(3, Json5Decoder::decode(chr(0xA0) . ' 3 '));
     }
 
+    /**
+     * @dataProvider dataForTestEscapeSequences
+     */
+    public function testEscapeSequences(string $json5, string $expected)
+    {
+        $this->assertSame($expected, Json5Decoder::decode($json5));
+    }
+
+    public function dataForTestEscapeSequences(): array
+    {
+        return [
+            'null character' => ["'\\0'", "\0"],
+            'null character before a non-digit' => ["'a\\0b'", "a\0b"],
+            'vertical tab' => ["'\\v'", "\v"],
+            'hex escape' => ["'\\x41'", 'A'],
+            'hex escape above 0x7F' => ["'\\xe9'", 'é'],
+            'non-escape character' => ["'\\a\\q\\Z'", 'aqZ'],
+            'escaped multibyte character' => ["'\\é'", 'é'],
+            'escaped line separator' => ["'a\\\u{2028}b'", 'ab'],
+            'escaped paragraph separator' => ["'a\\\u{2029}b'", 'ab'],
+        ];
+    }
+
+    /**
+     * @dataProvider dataForTestInvalidEscapeSequences
+     */
+    public function testInvalidEscapeSequences(string $json5)
+    {
+        $this->expectException(SyntaxError::class);
+
+        Json5Decoder::decode($json5);
+    }
+
+    public function dataForTestInvalidEscapeSequences(): array
+    {
+        return [
+            'null character before a digit' => ["'\\01'"],
+            'decimal digit' => ["'\\1'"],
+            'short hex escape' => ["'\\x4'"],
+            'non-hex escape' => ["'\\xZZ'"],
+            'short unicode escape' => ["'\\u004'"],
+            'backslash at end of input' => ["'\\"],
+        ];
+    }
+
     public function testNonBreakingSpaceInUTF8()
     {
         $this->assertSame(3, Json5Decoder::decode(chr(0xC2) . chr(0xA0) . ' 3 '));

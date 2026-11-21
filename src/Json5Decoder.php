@@ -295,14 +295,39 @@ final class Json5Decoder
                 }
 
                 $this->next();
+                if ($this->currentByte === null) {
+                    break;
+                }
+
                 if ($this->currentByte === "\r") {
                     if ($this->peek() === "\n") {
                         $this->next();
                     }
+                } elseif ($this->currentByte === "\xE2" && $this->peek() === "\x80" && \in_array($this->getByte($this->at + 2), ["\xA8", "\xA9"], true)) {
+                    // Line continuation with U+2028 (line separator) or U+2029 (paragraph separator)
+                    $this->next();
+                    $this->next();
                 } elseif (($escapee = self::getEscapee($this->currentByte)) !== null) {
                     $string .= $escapee;
-                } else {
+                } elseif ($this->currentByte === '0') {
+                    // \0 is only allowed when it is not followed by a decimal digit
+                    if (\ctype_digit((string) $this->peek())) {
+                        break;
+                    }
+
+                    $string .= "\0";
+                } elseif ($this->currentByte === 'x') {
+                    if (($hexEscaped = $this->match('/^x[A-Fa-f0-9]{2}/')) === null) {
+                        break;
+                    }
+
+                    $string .= \mb_chr((int) \hexdec(\substr($hexEscaped, 1)), 'UTF-8');
+                    continue;
+                } elseif (\ctype_digit($this->currentByte) || $this->currentByte === 'u') {
                     break;
+                } else {
+                    // Any other character escapes to itself (NonEscapeCharacter in the JSON5 spec)
+                    $string .= $this->currentByte;
                 }
             } elseif ($this->currentByte === "\n") {
                 // unescaped newlines are invalid; see:
@@ -586,6 +611,7 @@ final class Json5Decoder
             'n' => "\n",
             'r' => "\r",
             't' => "\t",
+            'v' => "\v",
             default => null,
         };
     }
